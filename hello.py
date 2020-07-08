@@ -677,8 +677,8 @@ def completeSignup():
 	session["otp"] = otp_code
 	sms_message= "Dear Customer, Welcome to The Vegan Dinasour. The OTP for your transaction is " + otp_code
 	print("SMS: ", sms_message)	
-	account_sid = 'AC9d2131f7296e8467f91dc3eccb36fbbb'
-	auth_token = '6f55716b6fcfaa950f1d4c01e5975813'
+	account_sid = ''
+	auth_token = ''
 	client = Client(account_sid, auth_token)
 	client.messages.create(from_='2062899465',
                        to=mobile,
