@@ -17,8 +17,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="../static/assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../static/assets/img/favicon.png">
+  <link rel="icon" type="image/png" sizes="180x180" href="../static/assets/img/vicon-4.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
     The Vegan Dinasour
@@ -119,6 +118,11 @@
   transform: translate(-50%, -50%);
 }
 
+.center-screen {
+  display: block;
+    margin-left: auto;
+    margin-right: auto
+}
 </style>
 <!--style>
 
@@ -137,217 +141,206 @@ background-color: hsl(351, 68%, 11%) !important;
 </style-->
 
 
-<body class="pricing sidebar-collapse">
+<body class="pricing sidebar-collapse" >
   <nav class="navbar navbar-color-on-scroll navbar-transparent    fixed-top  navbar-expand-lg " color-on-scroll="100" id="sectionsNav">
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href="https://demos.creative-tim.com/material-kit-pro/index.html">
+        <a class="navbar-brand" href="https://demos.creative-tim.com/material-kit-pro/index.html" style="color:black";>
           The Vegan Dinasour </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="navbar-toggler-icon"></span>
-          <span class="navbar-toggler-icon"></span>
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ml-auto">
-          <li class="dropdown nav-item">
-            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-              <i class="material-icons">apps</i> Components
-            </a>
-            <div class="dropdown-menu dropdown-with-icons">
-              <a href="../presentation.html" class="dropdown-item">
-                <i class="material-icons">line_style</i> Presentation
-              </a>
-              <a href="../index.html" class="dropdown-item">
-                <i class="material-icons">layers</i> All Components
-              </a>
-              <a href="http://demos.creative-tim.com/material-kit-pro/docs/2.1/getting-started/introduction.html" class="dropdown-item">
-                <i class="material-icons">content_paste</i> Documentation
-              </a>
-            </div>
-          </li>
-          <li class="dropdown nav-item">
-            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-              <i class="material-icons">view_day</i> Sections
-            </a>
-            <div class="dropdown-menu dropdown-with-icons">
-              <a href="../sections.html#headers" class="dropdown-item">
-                <i class="material-icons">dns</i> Headers
-              </a>
-              <a href="../sections.html#features" class="dropdown-item">
-                <i class="material-icons">build</i> Features
-              </a>
-              <a href="../sections.html#blogs" class="dropdown-item">
-                <i class="material-icons">list</i> Blogs
-              </a>
-              <a href="../sections.html#teams" class="dropdown-item">
-                <i class="material-icons">people</i> Teams
-              </a>
-              <a href="../sections.html#projects" class="dropdown-item">
-                <i class="material-icons">assignment</i> Projects
-              </a>
-              <a href="../sections.html#pricing" class="dropdown-item">
-                <i class="material-icons">monetization_on</i> Pricing
-              </a>
-              <a href="../sections.html#testimonials" class="dropdown-item">
-                <i class="material-icons">chat</i> Testimonials
-              </a>
-              <a href="../sections.html#contactus" class="dropdown-item">
-                <i class="material-icons">call</i> Contacts
-              </a>
-            </div>
-          </li>
-          <li class="dropdown nav-item">
-            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-              <i class="material-icons">view_carousel</i> Examples
-            </a>
-            <div class="dropdown-menu dropdown-with-icons">
-              <a href="../examples/about-us.html" class="dropdown-item">
-                <i class="material-icons">account_balance</i> About Us
-              </a>
-              <a href="../examples/blog-post.html" class="dropdown-item">
-                <i class="material-icons">art_track</i> Blog Post
-              </a>
-              <a href="../examples/blog-posts.html" class="dropdown-item">
-                <i class="material-icons">view_quilt</i> Blog Posts
-              </a>
-              <a href="../examples/contact-us.html" class="dropdown-item">
-                <i class="material-icons">location_on</i> Contact Us
-              </a>
-              <a href="../examples/landing-page.html" class="dropdown-item">
-                <i class="material-icons">view_day</i> Landing Page
-              </a>
-              <a href="../examples/login-page.html" class="dropdown-item">
-                <i class="material-icons">fingerprint</i> Login Page
-              </a>
-              <a href="../examples/pricing.html" class="dropdown-item">
-                <i class="material-icons">attach_money</i> Pricing Page
-              </a>
-              <a href="../examples/shopping-cart.html" class="dropdown-item">
-                <i class="material-icons">shopping_basket</i> Shopping Cart
-              </a>
-              <a href="../examples/ecommerce.html" class="dropdown-item">
-                <i class="material-icons">store</i> Ecommerce Page
-              </a>
-              <a href="../examples/product-page.html" class="dropdown-item">
-                <i class="material-icons">shopping_cart</i> Product Page
-              </a>
-              <a href="../examples/profile-page.html" class="dropdown-item">
-                <i class="material-icons">account_circle</i> Profile Page
-              </a>
-              <a href="../examples/signup-page.html" class="dropdown-item">
-                <i class="material-icons">person_add</i> Signup Page
-              </a>
-            </div>
-          </li>
+
+
+
+      {% if request.MOBILE %}
+      <li class="button-container nav-item iframe-extern">
+        <a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm" id="button10" style ="background-color: #94df69;">
+          <i class="material-icons">shopping_cart</i> Check Out
+        </a>
+      </li>
+      {%else%}
           <li class="button-container nav-item iframe-extern">
-            <a href="/shoppingcart" target="_blank" class="btn  btn-warning   btn-round btn-block" id="button10">
+            <a href="/shoppingcart" target="_blank" class="btn    btn-round btn-block btn-sm" id="button10" style ="background-color: #94df69;">
               <i class="material-icons">shopping_cart</i> Check Out
             </a>
           </li>
+        {%endif%}
+      </div>
+
+
         </ul>
       </div>
     </div>
   </nav>
-  <div class="page-header header-filter header-small" data-parallax="true" style="background-image: url('../static/assets/img/hfood.jpg');">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 ml-auto mr-auto text-center">
-          <h1 class="title">Let&apos;s get started</h1>
-          <h4>To get started, you will need to choose a plan for your needs. You can go with one of the five listed options below.</h4>
-        </div>
-      </div>
-    </div>
-  </div>
+
+
   <div class="main main-raised">
+
+    <img src="../static/assets/img/vegan-dino-bg.png" width="100" height="173.5" style="position: relative;
+     top:100px; margin-left: auto;
+  margin-right: auto;display: block; width: 50%; height: 50%;" >
     <div class="container">
       <div class="pricing-2">
         <div class="row">
           <div class="col-md-6 ml-auto mr-auto text-center">
-
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card card-pricing card-plain">
+        {% if request.MOBILE %}
+        
+          <div class="col-md-4" style="border-style: solid; border-color: #000000;margin: 3.5%; float:left;
+          display: block; margin-left: auto; margin-right: auto; ">
+            <div class="card card-pricing card-raised card-plain" >
               <div class="card-body">
-                <h4 class="card-category" style="color:black">Day</h4>
-                <h1 class="card-title"><small>SAR</small>{{price_objects[0].amount}}<small></small></h1>
-                <ul>
-                  <li><b>3</b> Meals in total</li>
-                  <li><b></b></li>
-                </ul>
-                <a onClick="changeText('button1', 'Added to cart ✓', 'Add to cart');" id="button1" class="btn btn-warning btn-raised btn-round" 
-                href="#pablo">
-                  Add to cart
-                </a>
-
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card card-pricing card-raised bg-warning">
-              <div class="card-body">
-                <h4 class="card-category" style="color:black">Month</h4>
+                <h2 class="card-category" style="color:black; font-family:impact" >Month</h2>
                 <h1 class="card-title"><small>SAR</small>{{price_objects[2].amount}}<small></small></h1>
                 <ul>
                   <li><b>3</b> Meals a day</li>
                   <li><b>60</b> Meals in total</li>
                 </ul>
-                <a onClick="changeText2('button2', 'Added to cart ✓', 'Add to cart');" id="button2" class="btn btn-white btn-raised btn-round" 
-                href="#pablo">
+                <a onClick="changeText2('button2', 'Added to cart ✓', 'Add to cart');" id="button2" class="btn  btn-raised btn-round" 
+                style ="background-color: #94df69;" href="#pablo">
                   Add to cart
                 </a>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="card card-pricing card-plain">
+
+          <div class="col-md-4" style="border-style: solid; border-color: #000000; margin: 3.5% ;float:left;
+          display: block; margin-left: auto; margin-right: auto;">
+            <div class="card card-pricing card-plain card-raised">
               <div class="card-body">
-                <h4 class="card-category" style="color:black">Week</h4>
+                <h2 class="card-category" style="color:black; font-family:Trebuchet MS ">Week</h2>
                 <h1 class="card-title"><small>SAR</small>{{price_objects[1].amount}}<small></small></h1>
                 <ul>
                   <li><b>3</b> Meals a day</li>
                   <li><b>15</b> Meals in total</li>
                 </ul>
-                <a onClick="changeText3('button3', 'Added to cart ✓', 'Add to cart');" id="button3" class="btn btn-warning btn-raised btn-round" 
-                href="#pablo">
+                <a onClick="changeText3('button3', 'Added to cart ✓', 'Add to cart');" id="button3" class="btn btn-raised btn-round"
+                  style ="background-color: #94df69;" href="#pablo">
                   Add to cart
                 </a>
               </div>
             </div>
           </div>
-        </div>
 
-
-        <div class="row">
-          <div class="col-sm-6 col-md-7">
+          <div class="col-md-4" style="border-style: solid; border-color: #000000; margin: 3.5% ;float:left;
+          display: block; margin-left: auto; margin-right: auto;" >
             <div class="card card-pricing card-plain">
               <div class="card-body">
-                <h4 class="card-category" style="color:black">Luch only for a week</h4>
-                <h1 class="card-title"><small>SAR</small>0<small></small></h1>
+                <h2 class="card-category" style="color:black">Day</h2>
+                <h1 class="card-title"><small>SAR</small>{{price_objects[0].amount}}<small></small></h1>
                 <ul>
-                  <li><b>1</b> Meal a day</li>
-                  <li><b>5</b> Meals in total</li>
+                  <li><b>3</b> Meals in total</li>
+                  <li><b></b></li>
                 </ul>
-                <a href="#pablo" class="btn btn-warning btn-raised btn-round">
-                  Get Started
+                <a onClick="changeText('button1', 'Added to cart ✓', 'Add to cart');" id="button1" class="btn  btn-raised btn-round" 
+                style ="background-color: #94df69;" href="#pablo">
+                  Add to cart
                 </a>
+
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+
+          <div class="col-md-4" style="border-style: solid; border-color: #000000; float:left; margin: 3.5%;
+          display: block; margin-left: auto; margin-right: auto;">
             <div class="card card-pricing card-plain">
               <div class="card-body">
-                <h4 class="card-category" style="color:black">Lunch only for a month</h4>
+                <h2 class="card-category" style="color:black">Lunch only for a month</h2>
                 <h1 class="card-title"><small>SAR</small>0<small></small></h1>
                 <ul>
                   <li><b>1</b> Meal a day</li>
                   <li><b>22</b> Meals in total</li>
                 </ul> 
-                <a href="#pablo" class="btn btn-warning btn-raised btn-round">
+                <a href="#pablo" class="btn  btn-raised btn-round" style ="background-color: #94df69;">
+                  Get Started
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+         
+       
+      {% else %}
+        <div class="row text-center" >
+          <div class="col-md-3" style="border-style: solid; border-color: #000000; width: 23%; float:left; margin: 3.5%">
+            <div class="card card-pricing card-raised card-plain" >
+              <div class="card-body">
+                <h2 class="card-category" style="color:black; font-family:impact" >Month</h2>
+                <h1 class="card-title"><small>SAR</small>{{price_objects[2].amount}}<small></small></h1>
+                <ul>
+                  <li><b>3</b> Meals a day</li>
+                  <li><b>60</b> Meals in total</li>
+                </ul>
+                <a onClick="changeText2('button2', 'Added to cart ✓', 'Add to cart');" id="button2" class="btn  btn-raised btn-round" 
+                style ="background-color: #94df69;" href="#pablo">
+                  Add to cart
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3" style="border-style: solid; border-color: #000000; width: 23%; float:left; margin: 3.5%">
+            <div class="card card-pricing card-plain card-raised">
+              <div class="card-body">
+                <h2 class="card-category" style="color:black; font-family:Trebuchet MS ">Week</h2>
+                <h1 class="card-title"><small>SAR</small>{{price_objects[1].amount}}<small></small></h1>
+                <ul>
+                  <li><b>3</b> Meals a day</li>
+                  <li><b>15</b> Meals in total</li>
+                </ul>
+                <a onClick="changeText3('button3', 'Added to cart ✓', 'Add to cart');" id="button3" class="btn btn-raised btn-round"
+                  style ="background-color: #94df69;" href="#pablo">
+                  Add to cart
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3" style="border-style: solid; border-color: #000000; width: 23%; float:left; margin: 3.5%" >
+            <div class="card card-pricing card-plain">
+              <div class="card-body">
+                <h2 class="card-category" style="color:black">Day</h2>
+                <h1 class="card-title"><small>SAR</small>{{price_objects[0].amount}}<small></small></h1>
+                <ul>
+                  <li><b>3</b> Meals in total</li>
+                  <li><b></b></li>
+                </ul>
+                <a onClick="changeText('button1', 'Added to cart ✓', 'Add to cart');" id="button1" class="btn  btn-raised btn-round" 
+                style ="background-color: #94df69;" href="#pablo">
+                  Add to cart
+                </a>
+
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+
+        <div class="row">
+
+
+          <div class="col-md-3" style=" width: 23%; float:left; margin: 3.5%">
+            <div class="card card-pricing card-plain">
+              <div class="card-body">
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="col-md-3" style="border-style: solid; border-color: #000000; width: 23%; float:left; margin: 3.5%">
+            <div class="card card-pricing card-plain">
+              <div class="card-body">
+                <h2 class="card-category" style="color:black">Lunch only for a month</h2>
+                <h1 class="card-title"><small>SAR</small>0<small></small></h1>
+                <ul>
+                  <li><b>1</b> Meal a day</li>
+                  <li><b>22</b> Meals in total</li>
+                </ul> 
+                <a href="#pablo" class="btn  btn-raised btn-round" style ="background-color: #94df69;">
                   Get Started
                 </a>
               </div>
@@ -357,60 +350,27 @@ background-color: hsl(351, 68%, 11%) !important;
 
 
 
+
+
       </div>
+      {%endif%}
+      <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+      <div class="elfsight-app-788b4707-11b4-49c4-9fb6-94c0fecd0d90"></div>
+
+<div>
+
+
+  <p></p>
+
+  <p></p>
+</div>
+<script src="https://apps.elfsight.com/p/platform.js" defer></script>
+<div class="elfsight-app-0a89a3fb-23e4-44ab-b8eb-94bc6fabdf41"></div>
+
       <hr>
       <div class="features-2">
-        <div class="text-center">
-          <h3 class="title">Frequently Asked Questions</h3>
-        </div>
-        <div class="row">
-          <div class="col-md-4 ml-auto">
-            <div class="info info-horizontal">
-              <div class="icon icon-info">
-                <i class="material-icons">card_membership</i>
-              </div>
-              <div class="description">
-                <h4 class="info-title">Can I cancel my subscription?</h4>
-                <p>Yes, you can cancel and perform other actions on your subscriptions via the My Account page. </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 mr-auto">
-            <div class="info info-horizontal">
-              <div class="icon icon-success">
-                <i class="material-icons">card_giftcard</i>
-              </div>
-              <div class="description">
-                <h4 class="info-title">Is there any discount for an annual subscription?</h4>
-                <p>Yes, we offer a 40% discount if you choose annual subscription for any plan.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 ml-auto">
-            <div class="info info-horizontal">
-              <div class="icon icon-success">
-                <i class="material-icons">attach_money</i>
-              </div>
-              <div class="description">
-                <h4 class="info-title">Which payment methods do you take?</h4>
-                <p>WooCommerce comes bundled with PayPal (for accepting credit card and PayPal account payments), BACS, and cash on delivery for accepting payments. </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 mr-auto">
-            <div class="info info-horizontal">
-              <div class="icon icon-rose">
-                <i class="material-icons">question_answer</i>
-              </div>
-              <div class="description">
-                <h4 class="info-title">Any other questions we can answer?</h4>
-                <p>We are happy to help you. Contact us.</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+        <div class="elfsight-app-fb96f86a-d6a9-4f47-9e93-baca6fd6da1a"></div>
       </div>
     </div>
   </div>

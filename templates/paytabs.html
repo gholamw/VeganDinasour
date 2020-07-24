@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Express Checkout(JS API)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <script src="https://paytabs.com/express/v4/paytabs-express-checkout.js"></script>
+    <script type="text/javascript">
+        Paytabs.initWithIframe(document.body,{
+          settings: {
+            secret_key: "n9qAfTSeLpkQZWkF1p7hUwh0MRh5Ily5uZGJTzYEZivYePDffLxahOa4Fr9oMIuhIa0BKYgJhLIvBmLR7i1o7ctNEDbqmFI4QIFB",
+            merchant_id: "10060203",
+            url_redirect: "http://127.0.0.1:5000/pricing.html",
+            amount: "2.0",
+            title: "vegan dino products",
+            currency: "SAR",
+            product_names: "test test",
+            order_id: "25",
+            ui_type: "iframe",
+            is_popup: "true",
+            ui_show_header: "true"
+          },
+          customer_info: {
+            first_name: "Wessam",
+            last_name: "Gholam",
+            phone_number: "0502014844",
+            email_address: "gholamw@tcd.ie",
+            country_code: "966"
+          },
+          billing_address: {
+            full_address: "faisaliya",
+            city: "Jeddah",
+            state: "Jeddah",
+            country: "SAU",
+            postal_code: "21488"
+          }
+        });
+    </script>
+  </body>
+</html>

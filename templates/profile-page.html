@@ -244,6 +244,20 @@
                   </a>
                 </li>
 
+                <li class="nav-item">
+                  <a class="nav-link" href="#works2" role="tab" data-toggle="tab">
+                    <i class="material-icons">add</i>
+                    Add Customers & Plans
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="#stats" role="tab" data-toggle="tab">
+                    <i class="material-icons">analytics</i>
+                    Stats
+                  </a>
+                </li>
+
               </ul>
 
 
@@ -260,10 +274,12 @@
         <tr>
             <th class="text-center">#</th>
             <th>Name</th>
-            <th>Email</th>
-            <th>Payments</th>
+            <th>Mobile Number</th>
+            <th>Number of Plans</th>
+            <th>Number of Bags</th>
+            <th>Delivery</th>
+
             <th class="text-right">Active Plan</th>
-            <th class="text-right">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -274,22 +290,47 @@
             <td class="text-center">{{ loop.index }}</td>
             {% set count = 100 %}
             <td>{{user.name}}</td>
-            <td>{{user.email}}</td>
-            <td class="td-actions text-right" align="center" style="display: inline-block;">
-                <button align="center" type="button" rel="tooltip" class="btn btn-info">
-                    <i class="material-icons">person</i>
-                </button>
-                <button type="button" rel="tooltip" class="btn btn-success">
-                    <i class="material-icons">edit</i>
-                </button>
-                <button type="button" rel="tooltip" class="btn btn-danger">
-                    <i class="material-icons">close</i>
-                </button>
-            </td>
+            <td>{{user.mobile}}</td>
+            <td>{{user.number_of_plans}}</td>
+            <td>{{user.number_of_bags}}</td>
+            <td>{{user.delivery_option}}</td>
+
+
+
+            
         </tr>
         {%endfor%} 
     </tbody>
 </table>
+
+
+
+
+<div class="row">
+<form>
+  <table>
+    <tr>
+<div>
+  <td><input type="text" placeholder="Name" name="otp" required="true"></td>
+</div>
+
+<div>
+  <td><input type="text" placeholder="Mobile Number" name="otp" required="true"></td>
+  </div>
+
+  <div>
+    <td><input type="text" placeholder="Number of Plans" name="otp" required="true"></td>
+    </div>
+
+    <div>
+      <td><input type="text" placeholder="Number of Bags" name="otp" required="true"></td>
+      </div>
+</tr>
+</table>
+
+
+</form>
+</div>
             </div>
           </div>
 
@@ -373,14 +414,10 @@
 
         <tr class="danger">
             <td class="text-center">{{ loop.index }}</td>
-            <td>{{plan.email}}</td>
+            <td>{{plan.customer_name}}</td>
             <td>{{plan.start_date}}</td>
             <td>{{plan.expiry_date}}</td>
-            {% if plan.is_active== True %}
-              <td class="active">Active</td>
-            {% else %}
-              <td class="danger">Expired</td>
-            {% endif %}  
+            <td class="danger">{{plan.is_active}}</td>
             <td>{{plan.delivery_option}}</td>
             <td class="td-actions text-right">
                 <button type="button" rel="tooltip" class="btn btn-info">
@@ -433,9 +470,25 @@
                       <input type="submit" href="/customize" class="btn btn-primary btn-round"></input>
                     </div>
                 </form>
+                <div class="text-center">
+                  <input type="submit" href="/updateAdmin" class="btn btn-primary btn-round"></input>
+                </div>
               </div>
             </div>
           </div>
+
+
+
+
+
+
+
+          <div class="tab-pane text-center gallery" id="stats">
+            <div class="row">
+              <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+              <div class="elfsight-app-57653215-213d-4bcb-8792-892531e8343c"></div>
+          </div>
+        </div>
 
 
 
