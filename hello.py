@@ -762,6 +762,7 @@ def completeSignup():
 	session["otp"] = otp_code
 	sms_message= "Dear Customer, Welcome to The Vegan Dinasour. The OTP for your transaction is " + otp_code
 	print("SMS: ", sms_message)	
+<<<<<<< HEAD
 	#account_sid = 'AC9d2131f7296e8467f91dc3eccb36fbbb'
 	#auth_token = '6f55716b6fcfaa950f1d4c01e5975813'
 	#client = Client(account_sid, auth_token)
@@ -779,6 +780,14 @@ def completeSignup():
 	print(otp_mi)
 	print(final_link)
 	r = requests.get(final_link)				   	
+=======
+	account_sid = ''
+	auth_token = ''
+	client = Client(account_sid, auth_token)
+	client.messages.create(from_='2062899465',
+                       to=mobile,
+                       body=sms_message)	
+>>>>>>> 3dbd109382f6f7699b50dfd497abd07d9b824aec
 	return render_template('otp.html', email_part1 = aa, price_object_required_amount = bb ,  plan = plan)
 	#return render_template('paypal.html', email=email_part1, startDate=startDate, delivery_option_selected=delivery_option_selected, shipping_amount=shipping_amount, 
 	#	amount = price_object_required_amount, plan = plan)
