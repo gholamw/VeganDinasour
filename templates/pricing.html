@@ -123,6 +123,29 @@
     margin-left: auto;
     margin-right: auto
 }
+
+
+
+.navigation {
+   /* fixed keyword is fine too */
+   position: sticky;
+   top: 0;
+   z-index: 100;
+   /* z-index works pretty much like a layer:
+   the higher the z-index value, the greater
+   it will allow the navigation tag to stay on top
+   of other tags */
+}
+
+div.fixed {
+  position: fixed;
+  bottom: 14px;
+  right: 0;
+  left: 0;
+  width: 300px;
+}
+
+
 </style>
 <!--style>
 
@@ -142,41 +165,93 @@ background-color: hsl(351, 68%, 11%) !important;
 
 
 <body class="pricing sidebar-collapse" >
-  <nav class="navbar navbar-color-on-scroll navbar-transparent    fixed-top  navbar-expand-lg " color-on-scroll="100" id="sectionsNav">
+  <nav class="navbar navbar-color-on-scroll navbar-transparent    fixed-top  navbar-expand-lg " color-on-scroll="100" id="sectionsNav" style="height:15%; left: 0; right: 0; background-image: url(../static/assets/img/green-leafs.jpg)" >
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href="https://demos.creative-tim.com/material-kit-pro/index.html" style="color:black";>
-          The Vegan Dinasour </a>
+
+          <div>
+  <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="position: sticky; top: 0; right: 0; left: 0; transform-origin: top right;">
+
+    <i class="material-icons">shopping_cart</i> Buy Now
+</a-->
+
+  </div>
+        
+        <!--div class="navbar-brand">
+          <-a href="#home" class="active" class="navbar-brand">Home</a>
+          <img src="../static/assets/img/vegan-dino-bg.ico" class="active">
+
+        </div-->
+
+        {% if request.MOBILE %}
+
+        <ul class="navbar-nav mx-auto">
+
+          <li><img src="../static/assets/img/vegan-dino-bg.ico"></li>
+
+        </ul>
+
+        {% else %}
 
 
+          <img src="../static/assets/img/vegan-dino-bg.ico" class="navbar-nav mx-auto" style="position: absolute; right: 0px; left: 0px; top: 0px; transform-origin: top center;">
 
-      {% if request.MOBILE %}
-      <li class="button-container nav-item iframe-extern">
-        <a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm" id="button10" style ="background-color: #94df69;">
-          <i class="material-icons">shopping_cart</i> Check Out
-        </a>
-      </li>
-      {%else%}
-          <li class="button-container nav-item iframe-extern">
-            <a href="/shoppingcart" target="_blank" class="btn    btn-round btn-block btn-sm" id="button10" style ="background-color: #94df69;">
-              <i class="material-icons">shopping_cart</i> Check Out
-            </a>
-          </li>
-        {%endif%}
+        
+
+        {% endif %}
+        <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="background-color: #94df69; position: absolute; right: 0px; top: 0px; transform-origin: top right;"-->
+
+
+            <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="background-color: #94df69; position: absolute; right: auto; top: auto; bottom: auto; left: auto; transform-origin: top right;">
+
+                <i class="material-icons">shopping_cart</i> Buy Now
+          </a-->
+        <!--a class="navbar-brand" href="https://demos.creative-tim.com/material-kit-pro/index.html" style="color:black";>
+          The Vegan Dinasour </a-->
+          <!--img src="../static/assets/img/vd-resized.png" width="50" height="40" style="position: relative;
+          top:-40px; margin-left:55px;
+        margin-right: -55px;display: block; width: 50%; height: 50%;" -->
+
+
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ml-auto">
+          
+            <li class="button-container nav-item iframe-extern">
+              <div>
+
+
+                            <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="background-color: #94df69; position: absolute; right: auto; top: auto; bottom: auto; left: auto; transform-origin: top right;">
+
+                <i class="material-icons">shopping_cart</i> Buy Now
+          </a-->
+                
+                <!--img src="../static/assets/img/vegan-dino-bg.ico"-->
+                <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="background-color: #94df69; display: block; 
+                margin-left: 1px; right: -1000px; top: -40px"-->
+
+                <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="background-color: #94df69;">
+
+                <i class="material-icons">shopping_cart</i> Buy Now
+                </a-->
+              </div>
+            </li>
+          </ul>
+        </div>
+    
+    
       </div>
-
-
         </ul>
       </div>
     </div>
   </nav>
 
 
+
   <div class="main main-raised">
 
-    <img src="../static/assets/img/vegan-dino-bg.png" width="100" height="173.5" style="position: relative;
-     top:100px; margin-left: auto;
-  margin-right: auto;display: block; width: 50%; height: 50%;" >
+    <!--img src="../static/assets/img/banner5.png" style="position: relative;
+     top:190px; margin-left: auto;
+  margin-right: auto;display: block;" -->
     <div class="container">
       <div class="pricing-2">
         <div class="row">
@@ -184,6 +259,16 @@ background-color: hsl(351, 68%, 11%) !important;
           </div>
         </div>
         {% if request.MOBILE %}
+        
+        <div>
+
+
+          <p>.</p>
+          <p>.</p>
+          <p>.</p>
+  
+        </div>
+
         
           <div class="col-md-4" style="border-style: solid; border-color: #000000;margin: 3.5%; float:left;
           display: block; margin-left: auto; margin-right: auto; ">
@@ -262,7 +347,17 @@ background-color: hsl(351, 68%, 11%) !important;
          
        
       {% else %}
-        <div class="row text-center" >
+      <div>
+
+
+        <p>.</p>
+        <p>.</p>
+        <p>.</p>
+
+      </div>
+
+
+        <div class="row text-center" style="top:100px;">
           <div class="col-md-3" style="border-style: solid; border-color: #000000; width: 23%; float:left; margin: 3.5%">
             <div class="card card-pricing card-raised card-plain" >
               <div class="card-body">
@@ -354,43 +449,65 @@ background-color: hsl(351, 68%, 11%) !important;
 
       </div>
       {%endif%}
-      <script src="https://apps.elfsight.com/p/platform.js" defer></script>
-      <div class="elfsight-app-788b4707-11b4-49c4-9fb6-94c0fecd0d90"></div>
+      {% if request.MOBILE %}
+      <div class="features-2">
 
-<div>
+    <img src="../static/assets/img/menu.jpg" style="position: relative;
+     top:100px; margin-left: auto;
+  margin-right: auto;display: block; width: 100%; height: 100%;" >
+
+      </div>
+
+{% else %}
+
+      <div class="features-2">
+
+    <img src="../static/assets/img/menu.jpg" style="position: relative;
+     top:100px; margin-left: auto;
+  margin-right: auto;display: block; width: 50%; height: 50%;" >
+
+      </div>
+
+{% endif %}
 
 
-  <p></p>
-
-  <p></p>
-</div>
 <script src="https://apps.elfsight.com/p/platform.js" defer></script>
 <div class="elfsight-app-0a89a3fb-23e4-44ab-b8eb-94bc6fabdf41"></div>
+
+
+
+
+<div class="fixed">
+  <button onclick="location.href='/shoppingcart';" type="button" class="btn btn-success bmd-btn-fab navigation">
+    <i class="material-icons">shopping_cart</i>
+  </button></div>
 
       <hr>
       <div class="features-2">
         <script src="https://apps.elfsight.com/p/platform.js" defer></script>
-        <div class="elfsight-app-fb96f86a-d6a9-4f47-9e93-baca6fd6da1a"></div>
+<div class="elfsight-app-16927323-b678-4808-bb88-445037c5fdff" style="position: relative;
+top:100px; margin-left: auto;
+margin-right: auto;display: block; width: 50%; height: 50%;">
+</div>
       </div>
-    </div>
-  </div>
+
   <footer class="footer">
     <div class="container">
       <nav class="float-left">
         <ul>
           <li>
-            <a href="https://www.creative-tim.com">
-              Creative Tim
+            <a href="/who-are-we">
+              Who Are We 
             </a>
           </li>
           <li>
             <a href="https://creative-tim.com/presentation">
-              About Us
+              Contact Us
             </a>
           </li>
           <li>
-            <a href="http://blog.creative-tim.com">
-              Blog
+            <a href="/terms-and-conditions">
+              Terms & Conditions
             </a>
           </li>
           <li>
@@ -403,9 +520,9 @@ background-color: hsl(351, 68%, 11%) !important;
       <div class="copyright float-right">
         &copy;
         <script>
-          document.write(new Date().getFullYear())
-        </script>, made with <i class="material-icons">favorite</i> by
-        <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+          //document.write(new Date().getFullYear())
+        </script>Sondos Ibrahim Mansour Barri Commercial EST CR4030375334
+        
       </div>
     </div>
   </footer>

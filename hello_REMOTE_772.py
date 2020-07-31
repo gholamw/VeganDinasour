@@ -1,6 +1,6 @@
 from flask import Flask,request, url_for, redirect, render_template, session
-from pypaytabs import Paytabs
-from pypaytabs import Utilities as util
+#from pypaytabs import Paytabs
+#from pypaytabs import Utilities as util
 #import moyasar
 #import braintree
 from werkzeug.datastructures import ImmutableOrderedMultiDict
@@ -10,18 +10,17 @@ from flask_mysqldb import MySQL
 #from passlib.hash import sha256_crypt
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-#from flask_wtf import FlaskForm
-#from wtforms import StringField, PasswordField, BooleanField, SubmitField
-#from wtforms.validators import DataRequired
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms.validators import DataRequired
 from sqlalchemy import exists
 from sqlalchemy import Column, Integer, String
 from sqlalchemy import Table, Text
 from sqlalchemy import *
 from sqlalchemy.schema import DropTable, DropConstraint
 import threading
-#from flask_login import LoginManager
+from flask_login import LoginManager
 from flask import jsonify
-from flask_mobility import Mobility
 
 from flask import Blueprint
 
@@ -31,8 +30,8 @@ import datetime
 from datetime import date, timedelta
 #from flask_socketio import SocketIO, emit
 
-#from twilio.rest import Client
-#from twilio.rest import TwilioRestClient
+from twilio.rest import Client
+from twilio.rest import TwilioRestClient
 #from datetime import datetime
 import math, random 
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -44,7 +43,6 @@ from collections import Counter
 #import requests
 
 app = Flask(__name__)  # still relative to module
-Mobility(app)
 #app.config['MYSQL_HOST'] = 'localhost'
 #app.config['MYSQL_USER'] = 'root'
 #app.config['MYSQL_PASSWORD'] = 'root'
@@ -56,8 +54,6 @@ app.config['SECRET_KEY'] = 'you-will-never-guess'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
 #app.run(threaded=True)
 db = SQLAlchemy(app)
-db.create_all()
-
 #socketio = SocketIO(app)
 #login_manager = LoginManager()
 #login_manager.init_app(app)
@@ -105,11 +101,11 @@ def print_date_time():
    # plan_date = null
     #db.DropTable(Plan)
     #db.session.commit()
-    #test = Column('delivery_option', String)
+    test = Column('delivery_option', String)
     #Plan.__table__.append_column(test)
-    plans = Plan4.query.all()
+    plans = Plan2.query.all()
     for x in plans:
-    	#print("plan delivery option: ", x.delivery_option)
+    	print("plan delivery option: ", x.delivery_option)
     	plan_date = x.start_date
     	if(x.p_type == "Day"):
     		end_date = plan_date + datetime.timedelta(days=1)
@@ -131,7 +127,7 @@ def print_date_time():
     		#end_date = plan_date + datetime.timedelta(days=30)
     		print("PLAN END DATE", end_date)
     		print("DIFFERENCE", no_of_days_difference)
-    		x.is_active = "Active"
+    		x.is_active = True
     		x.expiry_date = end_date
     		db.session.commit()
     	else:	
@@ -147,7 +143,7 @@ def print_date_time():
     		#end_date = plan_date + datetime.timedelta(days=30)
     		print("PLAN END DATE", end_date)
     		print("DIFFERENCE", no_of_days_difference)
-    		x.is_active = "Expired"
+    		x.is_active = False
     		x.expiry_date = end_date
     		db.session.commit()
 
@@ -176,7 +172,6 @@ def _run_on_start():
     print ("doing something important with")
     print("bewfore first request")
     db.create_all()
-	
     #dates()
     #manipulateDb()
     #manipulateDb2()
@@ -184,33 +179,11 @@ def _run_on_start():
     #session.permanent = False
     global p_day, p_week, p_month
     price_object = Prices.query.all()
-
-	#p_day= Product("Day", 100)
-	#p_week= Product("Week", 200)
-	#p_month= Product("Month", 1850)
-
-    price_day= Prices(p_type = "Day", amount = 100)
-	#db.session.add(p_day)
-    price_week= Prices(p_type = "Week", amount = 200)
-	#db.session.add(p_week)
-    price_month= Prices(p_type = "Month", amount = 1850)
-	#db.session.add(p_month)
-	#db.session.commit()
-    db.session.add(price_day)
-    db.session.add(price_week)
-    db.session.add(price_month)
-    db.session.commit()
-    price_object = Prices.query.all()
-    print(price_object)
-
-
-
-
     p_day= Product(price_object[0].p_type, price_object[0].amount)
     p_week= Product(price_object[1].p_type, price_object[1].amount)
     p_month= Product(price_object[2].p_type, price_object[2].amount)
     cartItem = Cart([])
-    #db.session.add(p_day)
+    print("set up session")
     session['dayPlan'] = 0
     session['monthPlan'] = 0
     session['weekPlan'] = 0
@@ -267,19 +240,10 @@ def before_request():
 @app.route("/")
 def hello():
 	db.create_all()
-	print(db)
-	print("plan4 rows:")
-	#print(Plan4.query.all())
 	#global p_day, p_week, p_month
 	list_of_products=[]
 	session['shop'] = list_of_products	
 	
-	###user = User(email="admin", name="Mansour Barri",admin=True, password="123")
-	###db.session.add(user)
-	###db.session.commit()
-	print("User admin:")
-	print(User.query.all())
-
 	price_object = Prices.query.all()
 	session['dayPlan'] = 0
 	session['monthPlan'] = 0
@@ -292,19 +256,6 @@ def hello():
 	session['vat'] = 0
 	session['checkbox'] = True
 
-	#delete all records
-	#db.session.query(User).delete()
-	#db.session.commit()
-	#db.session.query(Customer).delete()
-	#db.session.commit()
-	#db.session.query(Plan4).delete()
-	#db.session.commit()
-
-	#set up admin user
-
-	#user = User(email="admin", name="Mansour",admin=True, password="123")
-	#db.session.add(user)
-	#db.session.commit()
 
 	print("Cart has: ", cartItem.products)
 	print("Product: ", p_day)
@@ -314,8 +265,7 @@ def hello():
 	session['logged_in'] = False
 	if session['logged_in'] == False:
 		session['logged_in'] = False
-	return redirect('/pricing.html')	
-	#return render_template('home-page.html')	
+	return render_template('home-page.html')	
 
 @app.route('/pricing.html', methods=['GET', 'POST'])
 def pricing():
@@ -330,16 +280,6 @@ def menu():
 def addtocart():
 	return render_template('addtocart.html')			
 
-
-@app.route('/clearDB', methods=['GET' , 'POST'])
-def clearDB():
-	db.drop_all()
-	db.session.commit()
-	plans = Plan4.query.all()
-	print("plans:")
-	print(plans)
-	return "DB is cleared"
-	
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
@@ -528,20 +468,7 @@ def signupDay():
 			block_dates_confimed.append(str(k))
 			print(k)
 	print("Blocked dates are: ", block_dates_confimed)		
-	return render_template('mobile-check.html', plan="Day", planPrice=130, blocked_dates=block_dates_confimed)	  
-
-
-@app.route("/pick-start-date",methods=['GET', 'POST'])
-def pickStartDate():
-	block_dates = testDbManipulation()
-	block_dates_confimed = []
-	for k,v in block_dates.items():
-		if v > 100:
-			block_dates_confimed.append(str(k))
-			print(k)
-	print("Blocked dates are: ", block_dates_confimed)		
-	return render_template('pick-start-date.html', plan="Day", planPrice=130, blocked_dates=block_dates_confimed)	  
-
+	return render_template('signup-page.html', plan="Day", planPrice=130, blocked_dates=block_dates_confimed)	  
 
 @app.route("/signupMonth",methods=['GET', 'POST'])
 def signupMonth():
@@ -565,15 +492,7 @@ def smartpmnt():
 
 @app.route("/shake",methods=['GET', 'POST'])
 def shake():
-	return render_template('shake.html')
-
-@app.route("/paytabs",methods=['GET', 'POST'])
-def paytabs():
-	return render_template('paytabs.html')		
-
-@app.route("/terms-and-conditions",methods=['GET', 'POST'])
-def termsAndConditions():
-	return render_template('terms_and_conditions.html')	
+	return render_template('shake.html')	
 
 #@socketio.on('disconnect')
 #def disconnect_user():
@@ -645,7 +564,6 @@ def shoppingcart():
 	sum_of_products = sum_of_products + vat
 	session['vat'] = vat
 	session['sumOfCart'] = sum_of_products
-	session["customer_delivery"] = status_of_checkbox
 	checkbox = session.get('checkbox')
 	return render_template('shopping-cart.html', products=day, products_month=month, products_week=week, sum=sum_of_products,
 		shipping_cost=shipping_cost, vat=vat, chk_box=checkbox)		
@@ -659,12 +577,11 @@ def completeSignup():
 	if request.method == 'POST':
 		print("yes post method")
 		print(request.form)  
-		#email = request.form["email"]  
+		email = request.form["email"]  
 		fname = request.form["fname"]
 		startDate = request.form["datepicker"]  
 		plan = request.form["plan"]  
-		#password = request.form["pswd"]
-		session['customer_start_date'] = startDate
+		password = request.form["pswd"]
 		#delivery = request.form["delivery"]
 		delivery = "NOD"
 		mobile = request.form["mobile"]
@@ -679,18 +596,18 @@ def completeSignup():
 		#print(request.args.get('form_name') )	
 		#email = request.form.get("email")
 		#email = request.args.get('email')
-		#print(email)
+		print(email)
 		print(fname)
 		print(plan)
 		print("START DATE",startDate)
-		#print(password)
+		print(password)
 		start_date_plan = startDate
 		assigned_plan = plan
 
 		print(start_date_plan)
 		print("checkpoint")
+		user = User(email=email, name=fname,admin=True, password=password)
 		users = User.query.all()
-
 		print("Users", users)
 		user_email = User.query.filter_by(email = email).first()
 		#ret = query(exists().where(users.email==email)).scalar()
@@ -754,35 +671,12 @@ def completeSignup():
 		return render_template('paypalMonth.html', email=email_part1, startDate=startDate, delivery_option_selected = delivery_option_selected)
 
 	
-	session["current_signup_customer"] = mobile
-	session["current_signup_customer_name"] = fname
-	session["customer_name"] = fname
-	session["customer_address"] = "Jeddah"
-	session["customer_start_date"] = startDate
-
 	global aa,bb,cc
 	aa ,bb, cc = email_part1 , price_object_required_amount, plan
 	otp_code = generateOTP()
 	session["otp"] = otp_code
 	sms_message= "Dear Customer, Welcome to The Vegan Dinasour. The OTP for your transaction is " + otp_code
 	print("SMS: ", sms_message)	
-	#account_sid = 'AC9d2131f7296e8467f91dc3eccb36fbbb'
-	#auth_token = '6f55716b6fcfaa950f1d4c01e5975813'
-	#client = Client(account_sid, auth_token)
-	#client.messages.create(from_='2062899465',
-    #                   to=mobile,
-    #                   body=sms_message)
-	mob = str(mobile)
-	ottp = str(otp_code)
-	otp_msg1 = "http://api.smsala.com/api/SendSMS?api_id=API475422013615&api_password=6201620Wg&sms_type=P&encoding=T&sender_id=Vegan%20Dino&phonenumber="+mob
-	otp_msg2 = "&textmessage=Your%20OTP%20is%"
-	otp_mi="&textmessage=Your OTP is " + ottp
-	final_link = otp_msg1 + otp_mi
-	otp_req_link = "http://api.smsala.com/api/SendSMS?api_id=API475422013615&api_password=6201620Wg&sms_type=P&encoding=T&sender_id=Vegan%20Dino&phonenumber=" + mob + "&textmessage=Your%20OTP%20is%"+ ottp
-	http_req_opt = "http://api.smsala.com/api/SendSMS?api_id=API475422013615&api_password=6201620Wg&sms_type=P&encoding=T&sender_id=Vegan%20Dino&phonenumber=" + mob + "&textmessage=Your%20OTP%20is%" + ottp
-	print(otp_mi)
-	print(final_link)
-	r = requests.get(final_link)				   	
 	account_sid = ''
 	auth_token = ''
 	client = Client(account_sid, auth_token)
@@ -795,184 +689,25 @@ def completeSignup():
 	#return "Welcome to payment page"
 	
 ##############################################################
-@app.route("/otp-check",methods=['GET', 'POST'])
-def otpCheck():
-	mobile2 = request.form["mobile"]
-	#mobile = session.get('customer_login_mobile')
-	session['customer_login_mobile'] = mobile2
-	otp_code = generateOTP()
-	session["otp"] = otp_code
-	sendOTP(mobile2, otp_code)
-	return render_template('otp-check.html')
-
-@app.route("/complete-customer-signup",methods=['GET', 'POST'])
-def signUpFirstTimeCustomer():
-	fname = request.form["fname"]
-	startDate = request.form["datepicker"]  
-	plan = request.form["plan"]  
-	#password = request.form["pswd"]
-	session['customer_start_date'] = startDate
-	#delivery = request.form["delivery"]
-	#mobile = request.form["mobile"]
-	#session["current_signup_customer"] = mobile
-	session["current_signup_customer_name"] = fname
-	session["customer_name"] = fname
-	session["customer_address"] = "Jeddah"
-	session["customer_start_date"] = startDate
-	mobile = session.get('customer_login_mobile')
-	start_date = session.get('customer_start_date')
-	status_of_checkbox = session.get('checkbox')
-	day_plans = session.get('dayPlan')
-	week_plans = session.get('weekPlan')
-	month_plans = session.get('monthPlan')
-	customer_mobile = session.get('current_signup_customer')
-	customer_delivery = session.get('customer_delivery')
-	customer_name = session.get('customer_name')
-	customer_address = session.get('customer_address')
-	customer_str_date = session.get('customer_start_date')
-	toatl_number_of_plans = day_plans + week_plans + month_plans
-	toatl_number_of_plans = str(toatl_number_of_plans)
-	print("toatl_number_of_plans ", toatl_number_of_plans)
-	customer = Customer(mobile=mobile, name=customer_name,number_of_plans = toatl_number_of_plans,
-	number_of_bags = toatl_number_of_plans , special_customer = "No",address = customer_address, 
-	delivery_option = status_of_checkbox)
-	db.session.add(customer)
-	db.session.commit()
-	date_array = start_date.split("/")
-	day = date_array[1]
-	day_int = int(day)
-	month = date_array[0]
-	month_int = int(month)
-	year = date_array[2]
-	year_int = int(year)
-
-	date = datetime.datetime(year_int, month_int, day_int, 0, 0)
-	#date_time_obj = datetime.datetime.strptime(start_date, '%Y-%m-%d %H:%M:%S.%f')
-	print('Type of start date!')
-	#print(type(date_time_obj))
-	print(start_date)
-	print(date)
-	#for loop for Day 
-	customer_name = session.get('current_signup_customer_name')
-	for i in range(day_plans):
-		plan = Plan4(customer_mobile=customer_mobile, customer_name = customer_name,  start_date=date, p_type = "Day", is_active = "Active", expiry_date= date, number_of_pauses = 0, customer = customer)
-		db.session.add(plan)
-
-	#for loop for Week 
-	for i in range(week_plans):
-		plan = Plan4(customer_mobile=customer_mobile, customer_name = customer_name, start_date=date, p_type = "Week", is_active = "Active", expiry_date= date, number_of_pauses = 0, customer = customer)
-		db.session.add(plan)
-
-	#for loop for Month 
-	for i in range(month_plans):
-		plan = Plan4(customer_mobile=customer_mobile, customer_name = customer_name, start_date=date, p_type = "Month", is_active = "Active", expiry_date= date, number_of_pauses = 0, customer = customer)
-		db.session.add(plan)	
-	db.session.commit()
-	return redirect('/paytabs')
-	#return "Complete Customer Registeration"
-
-def addPlansToRegisteredCustomers(mobile):
-	customer = Customer.query.filter_by(mobile=mobile).first()
-
-	start_date = session.get('customer_start_date')
-	status_of_checkbox = session.get('checkbox')
-	day_plans = session.get('dayPlan')
-	week_plans = session.get('weekPlan')
-	month_plans = session.get('monthPlan')
-	customer_mobile = mobile
-	customer_name = customer.name
-	customer_delivery = session.get('customer_delivery')
-	customer_str_date = session.get('customer_start_date')
-	toatl_number_of_plans = day_plans + week_plans + month_plans
-	toatl_number_of_plans = str(toatl_number_of_plans)
-	print("toatl_number_of_plans ", toatl_number_of_plans)
-
-	customer.number_of_plans = str(int(customer.number_of_plans) +  int(toatl_number_of_plans))
-	customer.number_of_bags = str(int(customer.number_of_plans) +  int(toatl_number_of_plans))
-	print("total number of plans: ")
-	print(customer.number_of_plans)
-	print("total number of bags: ")
-	print(customer.number_of_bags)
-	db.session.commit()
-
-	#^^^^
-	date_array = start_date.split("/")
-	day = date_array[1]
-	day_int = int(day)
-	month = date_array[0]
-	month_int = int(month)
-	year = date_array[2]
-	year_int = int(year)
-
-	date = datetime.datetime(year_int, month_int, day_int, 0, 0)
-	#date_time_obj = datetime.datetime.strptime(start_date, '%Y-%m-%d %H:%M:%S.%f')
-	print('Type of start date!')
-	#print(type(date_time_obj))
-	print(start_date)
-	print(date)
-	#for loop for Day 
-	#customer_name = session.get('current_signup_customer_name')
-	for i in range(day_plans):
-		plan = Plan4(customer_mobile=customer_mobile, customer_name = customer_name,  start_date=date, p_type = "Day", is_active = "Active", expiry_date= date, number_of_pauses = 0, customer = customer)
-		db.session.add(plan)
-
-	#for loop for Week 
-	for i in range(week_plans):
-		plan = Plan4(customer_mobile=customer_mobile, customer_name = customer_name, start_date=date, p_type = "Week", is_active = "Active", expiry_date= date, number_of_pauses = 0, customer = customer)
-		db.session.add(plan)
-
-	#for loop for Month 
-	for i in range(month_plans):
-		plan = Plan4(customer_mobile=customer_mobile, customer_name = customer_name, start_date=date, p_type = "Month", is_active = "Active", expiry_date= date, number_of_pauses = 0, customer = customer)
-		db.session.add(plan)	
-	db.session.commit()
-	return True
-
-@app.route("/add-plan-completion",methods=['GET', 'POST'])
-def addPlanCompletion(): 
-	startDate = request.form["datepicker"]  
-	session['customer_start_date'] = startDate
-	mobile = session.get('customer_login_mobile')
-	print("Checking exisiting customer ----> ", mobile)
-	res = addPlansToRegisteredCustomers(mobile)
-	#return "plans are added!!"
-	return redirect('/paytabs')
 
 @app.route("/otp-auth",methods=['GET', 'POST'])
 def otpAuth():
-	#print(aa)
-	#print(bb)
-	#print(cc)
-	#print(request.form)  
-	mobile = session.get('customer_login_mobile')
-	print("mobile is ")
-	print(mobile)
-	#mobile2 = request.form["mobile"]
-	#print(mobile2)
-	exists = db.session.query(db.exists().where(Customer.mobile == mobile)).scalar()
-	if exists == False:
-		block_dates = testDbManipulation()
-		block_dates_confimed = []
-		for k,v in block_dates.items():
-			if v > 100:
-				block_dates_confimed.append(str(k))
-				print(k)
-		print("Blocked dates are: ", block_dates_confimed)		
-		return render_template('signup-page.html', plan="Day", planPrice=130, blocked_dates=block_dates_confimed)
-	print("The Mobile exisit or not ? ")
-	print(exists)
-	#return "ok!!"
-	otp = request.form["OTP"]
+	print(aa)
+	print(bb)
+	print(cc)
+	print(request.form)  
+	otp = request.form["otp"]
 	otp_gen = session["otp"]
 
 	print("generated otp: ", session["otp"])
 	print(type(otp_gen))
-	#print("customer entr otp: ", request.form["otp"])
-	#print(type(otp))
-	#print(session["otp"] == int(otp))
+	print("customer entr otp: ", request.form["otp"])
+	print(type(otp))
+	print(session["otp"] == int(otp))
+
 	if session["otp"] == otp:
 		print("OTP matches")
-		return redirect('/pick-start-date')
+		return render_template('paypal.html', email=aa, amount = bb, plan = cc)
 		#return "Two way authentication approved"
 	return "Two way authentication denied"	
 
@@ -1377,368 +1112,6 @@ def login():
 
 	return render_template("login-page.html")
 
-
-@app.route('/customer-login', methods=['GET', 'POST'])
-def customerLogin():
-	print_date_time()
-	if session['logged_in'] == True:
-		print("user is already logged in")
-		users = User.query.all()
-		payments = Payment.query.all()
-		plans = Plan2.query.all()
-		name = " "
-		return render_template("profile-page.html", users=users, name=name, payments=payments, plans=plans)
-	else:
-		print("user not logged in")
-
-	return render_template("customer-login.html")	
-
-
-@app.route('/modifyPlan/<int:plan_id>', methods=['GET', 'POST'])
-def modifyPlan(plan_id):
-	print("Plan ID: " , plan_id)
-	plans_object = Plan4.query.filter_by(id=plan_id).first()
-	dates = active_dates_for_each_plan(plans_object)
-	date1 = plans_object.expiry_date
-	date1 = date1 + timedelta(days=1) 
-
-	if plans_object.p_type == "Week": 
-		date2 = date1 + timedelta(days=7)
-	else:
-		date2 = date1 + timedelta(days=30)
-
-
-	
-
-	print("Date Pause 1: " , date1)
-	print("Date Pause 2: " , date2)
-
-	dates2 = active_dates_for_plan(date1 , date2)
-	print("Dates2" , date2)
-	date1 = date1.strftime('%Y-%#m-%#d')
-	print("Date Pause 1: " , date1)
-
-	#return "modify plan" + str(plan_id)
-	return render_template("modify-plan.html", plan=plans_object, dates = dates, dates2 = dates2, start_pause_date = date1, plan_id = plan_id)
-
-@app.route('/pausePlan/<int:plan_id>', methods=['GET', 'POST'])
-def pausePlan(plan_id):
-	#pause = " "
-	if request.method == 'POST':
-		print("yes post method")
-		pasue = request.form["pause"]
-		print(request.form["pause"])
-		split = request.form["pause"].split('-')
-		print(split[0])
-		strt = split[0]
-		end = split[1]
-		split_strt = strt.split('/')
-		split_end = end.split('/')
-		print("date in details: ")
-		print(split_strt[0])
-		print(split_strt[1])
-		print(split_strt[2])
-
-		date_time_start_obj = datetime.datetime(int(split_strt[2]),int(split_strt[0]),int(split_strt[1]))
-		date_time_end_obj = datetime.datetime(int(split_end[2]), int(split_end[0]),int(split_end[1]))
-		pause1 = Pause(start_date = date_time_start_obj, expiry_date = date_time_end_obj, plan_id = plan_id)
-		db.session.add(pause1)
-		db.session.commit()
-		pauses = Pause.query.all()
-		print("Pause DB objects")
-		print(pauses)
-
-		print("date objects: ----->")
-		print(date_time_start_obj)
-		print(date_time_end_obj)
-		
-
-
-
-
-	else:
-		print("get method")	
-	#unpause = request.form["datepicker2"]
-	print("Pausing Dates are:")
-	#print(pause)
-	#print(unpasue)
-	return "hi"
-
-@app.route('/mobile-check', methods=['GET', 'POST'])
-def mobileCheck():
-	return render_template("mobile-check.html")
-
-
-@app.route('/who-are-we', methods=['GET', 'POST'])
-def whoAreWe():
-	return render_template("who-are-we.html")
-
-def updateAdminDetails():
-	#def
-	print("Inside Update Admin Details function --->")
-	#get today's date
-	today = date.today()
-	tomorrow = today + timedelta(days=1)
-	tomorrow = tomorrow.strftime("%Y-%m-%d")
-	print("Today's date:", today)
-	print("Tomorrow's date:", tomorrow)
-
-	pause_plans = Pause.query.all()
-	print("All paused plans: ")
-	print(pause_plans)
-
-	for plan in pause_plans: 
-		print("Pause plan details:")
-		print(plan)
-		print(plan.start_date)
-		print(plan.plan_id)
-		dt = plan.start_date
-		dt = dt.strftime("%Y-%m-%d")
-		print("Date after trim: ", dt)
-		print("Comparison result:")
-		print(tomorrow == dt)
-		print(type(tomorrow))
-		print(type(dt))
-		if tomorrow == dt:
-			plan_object = Plan4.query.filter_by(id=plan.plan_id).first()
-			customer_object = Customer.query.filter_by(mobile=plan_object.customer_mobile).first()
-
-			print(customer_object.name)
-			print(customer_object.mobile)
-
-			print("They are equal")
-			print("-------->>")
-			print("Status of Plan: ", plan_object.is_active)
-			if plan_object.is_active == "Active":
-				print("inside if statement to make status Pause")
-				customer_object.number_of_bags = str(int(customer_object.number_of_bags) - 1)
-				customer_object.number_of_plans = str(int(customer_object.number_of_plans) - 1)
-				print(customer_object.number_of_bags)
-				print(customer_object.number_of_plans)
-				plan_object.is_active = "Paused"
-				plan_object.p_type = "Week"
-				db.session.commit()
-				print("-------->>>>>>>>>>")
-				print("Status of Plan after commit: ", plan_object.is_active)
-				all_plans = Plan4.query.all()
-				print("Checking >>>")
-				print("Plan 1: ", all_plans[0].is_active)
-				print("Plan 2:" , all_plans[1].is_active)
-
-
-
-
-	return True	
-
-@app.route('/updateAdmin', methods=['GET', 'POST'])
-def updateAdmin():
-	return "Admin Check Applied"
-
-	
-
-@app.route('/mobilre-check', methods=['GET', 'POST'])
-def mobileChecrk():
-	print_date_time()
-	if session['logged_in'] == True:
-		print("user is already logged in")
-		users = User.query.all()
-		payments = Payment.query.all()
-		plans = Plan2.query.all()
-		name = " "
-		return render_template("profile-page.html", users=users, name=name, payments=payments, plans=plans)
-	else:
-		mobile = request.form["mobile"] 
-		session['customer_login_mobile'] = mobile
-		customer_object = Customer.query.filter_by(mobile=mobile).first()
-		session['logged_in_customer'] = True
-		otp_code = generateOTP()
-		session['customer_login_otp'] = otp_code
-		#for testing purposes
-		mobile = session.get('customer_login_mobile')
-		customer_object = Customer.query.filter_by(mobile=mobile).first()
-		plans_object = Plan4.query.filter_by(customer_mobile=mobile).first()
-		plans = Plan4.query.all()
-		print(customer_object)
-		print(plans_object)
-		print(plans)
-		print(plans[0])
-		customer_plans = []
-		customer_plan_dates = []
-		for plan in plans:
-			if plan.customer_mobile == mobile:
-				customer_plans.append(plan)
-				plan_dates = active_dates_for_each_plan(plan)
-				customer_plan_dates.append(plan_dates)
-				print(plan_dates)
-				print("plan ID: " , plan.id)
-		#uncomment for depeloping purposes
-		#sendOTP(mobile, otp_code)
-		#print("user not logged in")
-
-	print("Array of plan's dates as follows: ")
-	#print(customer_plan_dates[1])
-	datpicker_id = 5000	
-
-	return render_template("customer-profile-page.html", users=customer_plans, name=customer_object.name, dates=customer_plan_dates[0], dpid = datpicker_id)
-
-
-
-
-@app.route('/customer-logged-in', methods=['GET', 'POST'])
-def customerLoggedIn():
-	print_date_time()
-	if session['logged_in'] == True:
-		print("user is already logged in")
-		users = User.query.all()
-		payments = Payment.query.all()
-		plans = Plan4.query.all()
-		name = " "
-		return render_template("profile-page.html", users=users, name=name, payments=payments, plans=plans)
-	else:
-		mobile = request.form["mobile"] 
-		session['customer_login_mobile'] = mobile
-		customer_object = Customer.query.filter_by(mobile=mobile).first()
-		session['logged_in_customer'] = True
-		otp_code = generateOTP()
-		session['customer_login_otp'] = otp_code
-		#for testing purposes
-		mobile = session.get('customer_login_mobile')
-		customer_object = Customer.query.filter_by(mobile=mobile).first()
-		plans_object = Plan4.query.filter_by(customer_mobile=mobile).first()
-		plans = Plan4.query.all()
-		print(customer_object)
-		print(plans_object)
-		print(plans)
-		print(plans[0])
-		customer_plans = []
-		customer_plan_dates = []
-		for plan in plans:
-			if plan.customer_mobile == mobile:
-				customer_plans.append(plan)
-				plan_dates = active_dates_for_each_plan(plan)
-				customer_plan_dates.append(plan_dates)
-				print(plan_dates)
-				print("plan ID: " , plan.id)
-		#uncomment for depeloping purposes
-		#sendOTP(mobile, otp_code)
-		#print("user not logged in")
-
-	print("Array of plan's dates as follows: ")
-	#print(customer_plan_dates[1])
-	datpicker_id = 5000	
-
-	return render_template("customer-profile-page.html", users=customer_plans, name=customer_object.name, dates=customer_plan_dates[0], dpid = datpicker_id)
-
-
-def active_dates_for_plan(start_date, end_date):
-	today_date = date.today()
-
-
-	edate = end_date
-	sdate = start_date
-	#print("Start Date: ", sdate)
-	#print("End Date: ", edate)
-
-	list_of_active_dates = []
-	delta = edate.date() - sdate.date()       # as timedelta
-	day_name= ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday']
-
-	for i in range(delta.days + 1):
-		day = sdate  + timedelta(days=i)
-		day = day.strftime('%#d-%#m-%Y')
-		day_index = datetime.datetime.strptime(day, '%d-%m-%Y').weekday()
-		print("day_index: ", day_index)
-		if day_index == 4 or day_index == 5:
-			print("weekend")
-		else:	
-			list_of_active_dates.append(day)
-		#print(day)
-	#print(list_of_date_and_plans)	
-	return list_of_active_dates
-
-def active_dates_for_each_plan(plan):
-	today_date = date.today()
-	edate = plan.expiry_date   # end date
-	sdate = plan.start_date	   # start date
-	#print("Start Date: ", sdate)
-	#print("End Date: ", edate)
-
-	list_of_active_dates = []
-	delta = edate.date() - sdate.date()       # as timedelta
-	day_name= ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday']
-
-	for i in range(delta.days + 1):
-		day = sdate  + timedelta(days=i)
-		day = day.strftime('%#d-%#m-%Y')
-		day_index = datetime.datetime.strptime(day, '%d-%m-%Y').weekday()
-		print("day_index: ", day_index)
-		if day_index == 4 or day_index == 5:
-			print("weekend")
-		else:	
-			list_of_active_dates.append(day)
-		#print(day)
-	#print(list_of_date_and_plans)	
-	return list_of_active_dates
-
-
-def sendOTP(mobile, otp_code):
-	mob = str(mobile)
-	ottp = str(otp_code)
-	otp_msg1 = "http://api.smsala.com/api/SendSMS?api_id=API475422013615&api_password=6201620Wg&sms_type=P&encoding=T&sender_id=Vegan%20Dino&phonenumber="+mob
-	otp_msg2 = "&textmessage=Your%20OTP%20is%"
-	otp_mi="&textmessage=Your OTP is " + ottp
-	final_link = otp_msg1 + otp_mi
-	otp_req_link = "http://api.smsala.com/api/SendSMS?api_id=API475422013615&api_password=6201620Wg&sms_type=P&encoding=T&sender_id=Vegan%20Dino&phonenumber=" + mob + "&textmessage=Your%20OTP%20is%"+ ottp
-	http_req_opt = "http://api.smsala.com/api/SendSMS?api_id=API475422013615&api_password=6201620Wg&sms_type=P&encoding=T&sender_id=Vegan%20Dino&phonenumber=" + mob + "&textmessage=Your%20OTP%20is%" + ottp
-	print(otp_mi)
-	print(final_link)
-	r = requests.get(final_link)
-
-	#sms_message= "Your OTP is " + otp_code
-	#print("SMS: ", sms_message)	
-	#account_sid = 'AC9d2131f7296e8467f91dc3eccb36fbbb'
-	#auth_token = '6f55716b6fcfaa950f1d4c01e5975813'
-	#client = Client(account_sid, auth_token)
-	#client.messages.create(from_='2062899465',
-     #                  to=mobile,
-      #                 body=sms_message)
-
-@app.route("/login-otp",methods=['GET', 'POST'])
-def loginOTP():
-	print(aa)
-	print(bb)
-	print(cc)
-	print(request.form)  
-	otp = request.form["otp"]
-	otp_gen = session["customer_login_otp"]
-
-	print("generated otp: ", session["otp"])
-	print(type(otp_gen))
-	print("customer entr otp: ", request.form["otp"])
-	print(type(otp))
-	print(session["otp"] == int(otp))
-
-	if session["customer_login_otp"] == otp:
-		print("OTP matches")
-		mobile = session.get('customer_login_mobile')
-		customer_object = Customer.query.filter_by(mobile=mobile).first()
-		plans_object = Plan4.query.filter_by(customer_mobile=mobile).first()
-		plans = Plan4.query.all()
-		print(customer_object)
-		print(plans_object)
-		print(plans)
-		print(plans[0])
-		customer_plans = []
-		for plan in plans:
-			if plan.customer_mobile == mobile:
-				customer_plans.append(plan)	
-
-		print(customer_plans[0])
-		return render_template("customer-profile-page.html", users=customer_plans, name=customer_object.name)
-	else:
-		return "OTP does not match"
-
-
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
 	session['logged_in'] = False
@@ -1787,20 +1160,18 @@ def customize():
 @app.route('/loggingin', methods=['GET', 'POST'])
 def logging():
 	print_date_time()
-	updateAdminDetails()
 	print("yes post method")
 	print(request.form)  
 	email = request.form["email"]
 	password = request.form["pswd"]
 	print("Email: ",email)
 	users = User.query.all()
-	customers = Customer.query.all()
 	payments = Payment.query.all()
-	plans = Plan4.query.all()
+	plans = Plan2.query.all()
 	print("PLANS ARE: ", plans)
-	#payment = payments[0]
-	#pay_user = payment.payer_email
-	#print("checking payer user:",pay_user)
+	payment = payments[0]
+	pay_user = payment.payer_email
+	print("checking payer user:",pay_user)
 	print("Users", users)
 	user = User.query.filter_by(email=email).first()
 	print("check ...", user)
@@ -1812,11 +1183,7 @@ def logging():
 			session['user'] = email
 			session['logged_in'] = True
 			print("session: ", session['user'])
-			print("plan status: ")
-			print(plans[0].is_active)
-			print(type(plans[0].is_active))
-			print("plan pauses: ", plans[0].number_of_pauses)
-			return render_template("profile-page.html", users=customers, name=name, payments=payments, plans=plans)
+			return render_template("profile-page.html", users=users, name=name, payments=payments, plans=plans)
 			#return redirect(url_for('profile'))
 	else:
 		print("user login Unauthorized.")	
@@ -1949,56 +1316,6 @@ class User(db.Model):
 		self.admin = admin
 		self.password = password
 		self.payments = payments
-
-
-class Customer(db.Model):
-	mobile = db.Column(db.String(50), primary_key=True)
-	name = db.Column(db.String(50))
-	number_of_plans = db.Column(db.String(50))
-	number_of_bags = db.Column(db.String(50))
-	special_customer = db.Column(db.String(50))
-	address = db.Column(db.String(50))
-	delivery_option = db.Column(db.Boolean, default=False)
-	plan = db.relationship("Plan4", uselist=True, backref='customer')
-
-	def __init__(self,mobile,name,number_of_plans, number_of_bags,special_customer, address,
-	delivery_option, plan = []):
-		self.mobile = mobile
-		self.name = name
-		self.number_of_plans = number_of_plans
-		self.number_of_bags = number_of_bags
-		self.special_customer = special_customer
-		self.address = address
-		self.delivery_option = delivery_option
-		self.plan = plan
-
-class Pause(db.Model):
-	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-	start_date = db.Column(db.DateTime)
-	expiry_date = db.Column(db.DateTime)
-	plan_id = db.Column(db.String(50), db.ForeignKey('plan4.id'))
-
-class Plan4(db.Model):
-	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-	customer_mobile = db.Column(db.String(50), db.ForeignKey('customer.mobile'))
-	customer_name = db.Column(db.String(50))  
-	start_date = db.Column(db.DateTime)
-	p_type = db.Column(db.String(50))
-	is_active = db.Column(db.String(50))
-	expiry_date = db.Column(db.DateTime)
-	number_of_pauses= db.Column(db.Integer)
-	pause = db.relationship("Pause", uselist=True, backref='plan4')
-	
-
-class Plan3(db.Model):
-	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-	customer_mobile = db.Column(db.String(50), db.ForeignKey('customer.mobile')) 
-	start_date = db.Column(db.DateTime)
-	p_type = db.Column(db.String(50))
-	is_active = db.Column(db.Boolean, default=False)
-	expiry_date = db.Column(db.DateTime)	
-
-
 
 
 

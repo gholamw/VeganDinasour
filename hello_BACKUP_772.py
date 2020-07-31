@@ -571,10 +571,6 @@ def shake():
 def paytabs():
 	return render_template('paytabs.html')		
 
-@app.route("/terms-and-conditions",methods=['GET', 'POST'])
-def termsAndConditions():
-	return render_template('terms_and_conditions.html')	
-
 #@socketio.on('disconnect')
 #def disconnect_user():
 #    print("user closes window")	
@@ -766,6 +762,7 @@ def completeSignup():
 	session["otp"] = otp_code
 	sms_message= "Dear Customer, Welcome to The Vegan Dinasour. The OTP for your transaction is " + otp_code
 	print("SMS: ", sms_message)	
+<<<<<<< HEAD
 	#account_sid = 'AC9d2131f7296e8467f91dc3eccb36fbbb'
 	#auth_token = '6f55716b6fcfaa950f1d4c01e5975813'
 	#client = Client(account_sid, auth_token)
@@ -783,12 +780,14 @@ def completeSignup():
 	print(otp_mi)
 	print(final_link)
 	r = requests.get(final_link)				   	
+=======
 	account_sid = ''
 	auth_token = ''
 	client = Client(account_sid, auth_token)
 	client.messages.create(from_='2062899465',
                        to=mobile,
                        body=sms_message)	
+>>>>>>> 3dbd109382f6f7699b50dfd497abd07d9b824aec
 	return render_template('otp.html', email_part1 = aa, price_object_required_amount = bb ,  plan = plan)
 	#return render_template('paypal.html', email=email_part1, startDate=startDate, delivery_option_selected=delivery_option_selected, shipping_amount=shipping_amount, 
 	#	amount = price_object_required_amount, plan = plan)
@@ -868,8 +867,7 @@ def signUpFirstTimeCustomer():
 		plan = Plan4(customer_mobile=customer_mobile, customer_name = customer_name, start_date=date, p_type = "Month", is_active = "Active", expiry_date= date, number_of_pauses = 0, customer = customer)
 		db.session.add(plan)	
 	db.session.commit()
-	return redirect('/paytabs')
-	#return "Complete Customer Registeration"
+	return "Complete Customer Registeration"
 
 def addPlansToRegisteredCustomers(mobile):
 	customer = Customer.query.filter_by(mobile=mobile).first()
@@ -935,8 +933,7 @@ def addPlanCompletion():
 	mobile = session.get('customer_login_mobile')
 	print("Checking exisiting customer ----> ", mobile)
 	res = addPlansToRegisteredCustomers(mobile)
-	#return "plans are added!!"
-	return redirect('/paytabs')
+	return "plans are added!!"
 
 @app.route("/otp-auth",methods=['GET', 'POST'])
 def otpAuth():
@@ -1469,10 +1466,6 @@ def mobileCheck():
 	return render_template("mobile-check.html")
 
 
-@app.route('/who-are-we', methods=['GET', 'POST'])
-def whoAreWe():
-	return render_template("who-are-we.html")
-
 def updateAdminDetails():
 	#def
 	print("Inside Update Admin Details function --->")
@@ -1533,8 +1526,6 @@ def updateAdminDetails():
 @app.route('/updateAdmin', methods=['GET', 'POST'])
 def updateAdmin():
 	return "Admin Check Applied"
-
-	
 
 @app.route('/mobilre-check', methods=['GET', 'POST'])
 def mobileChecrk():
