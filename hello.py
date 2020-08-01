@@ -1371,10 +1371,11 @@ def login():
 	print_date_time()
 	if session['logged_in'] == True:
 		print("user is already logged in")
-		users = User.query.all()
+		users = Customer.query.all()
 		payments = Payment.query.all()
-		plans = Plan2.query.all()
+		plans = Plan4.query.all()
 		name = " "
+		print(plans)
 		return render_template("profile-page.html", users=users, name=name, payments=payments, plans=plans)
 	else:
 		print("user not logged in")
@@ -1793,6 +1794,14 @@ def logging():
 	print_date_time()
 	updateAdminDetails()
 	print("yes post method")
+	status = session.get('logged_in')
+	if status == True:
+		print("status is True")
+		customers = Customer.query.all()
+		payments = Payment.query.all()
+		plans = Plan4.query.all()
+		name = "Mansour Barri"
+		return render_template("profile-page.html", users=customers, name=name, payments=payments, plans=plans)
 	print(request.form)  
 	email = request.form["email"]
 	password = request.form["pswd"]
