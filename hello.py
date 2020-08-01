@@ -196,10 +196,10 @@ def _run_on_start():
     price_month= Prices(p_type = "Month", amount = 1850)
 	#db.session.add(p_month)
 	#db.session.commit()
-    db.session.add(price_day)
-    db.session.add(price_week)
-    db.session.add(price_month)
-    db.session.commit()
+    ##db.session.add(price_day)
+    ##db.session.add(price_week)
+    ##db.session.add(price_month)
+    ##db.session.commit()
     price_object = Prices.query.all()
     print(price_object)
 
@@ -574,6 +574,10 @@ def paytabs():
 @app.route("/terms-and-conditions",methods=['GET', 'POST'])
 def termsAndConditions():
 	return render_template('terms_and_conditions.html')	
+
+@app.route("/contact-us",methods=['GET', 'POST'])
+def contactUS():
+	return render_template('contact-us.html')		
 
 #@socketio.on('disconnect')
 #def disconnect_user():
