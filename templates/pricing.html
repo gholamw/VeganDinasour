@@ -146,6 +146,32 @@ div.fixed {
 }
 
 
+div.fixed2 {
+  position: fixed;
+  bottom: 50px;
+  right: 0;
+  left: 0;
+  width: 300px;
+}
+
+
+.float{
+	position:fixed;
+	width:20px;
+	height:20px;
+	bottom:55px;
+	left:52px;
+	background-color:red;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.my-float{
+	margin-top:25px;
+}
+
 </style>
 <!--style>
 
@@ -165,7 +191,7 @@ background-color: hsl(351, 68%, 11%) !important;
 
 
 <body class="pricing sidebar-collapse" >
-  <nav class="navbar navbar-color-on-scroll navbar-transparent    fixed-top  navbar-expand-lg " color-on-scroll="100" id="sectionsNav" style="height:15%; left: 0; right: 0; background-image: url(../static/assets/img/green-leafs.jpg)" >
+  <nav class="navbar navbar-color-on-scroll navbar-transparent    fixed-top  navbar-expand-lg " color-on-scroll="100" id="sectionsNav" style="height:15%; left: 0; right: 0; background-image: url(../static/assets/img/header11.jpg)" >
     <div class="container">
       <div class="navbar-translate">
 
@@ -194,7 +220,7 @@ background-color: hsl(351, 68%, 11%) !important;
         {% else %}
 
 
-          <img src="../static/assets/img/vegan-dino-bg.ico" class="navbar-nav mx-auto" style="position: absolute; right: 0px; left: 0px; top: 0px; transform-origin: top center;">
+          <img src="../static/assets/img/vegan-dino-bg(2).ico" class="navbar-nav mx-auto" style="position: absolute; right: 0px; left: 0px; top: -12px; transform-origin: top center;">
 
         
 
@@ -247,7 +273,9 @@ background-color: hsl(351, 68%, 11%) !important;
 
 
 
-  <div class="main main-raised" style="background-image: url(../static/assets/img/LONGLIVE.jpg)">
+  <div class="main main-raised" style="background-image: url(../static/assets/img/LONGLIVE10.jpg); 
+
+  ">
 
     <!--img src="../static/assets/img/banner5.png" style="position: relative;
      top:190px; margin-left: auto;
@@ -356,6 +384,16 @@ background-color: hsl(351, 68%, 11%) !important;
 
       </div>
 
+      <div class="text-center">
+
+        <p style="font-size: 25px;"><b>Healthy and Delicious meals freshly made and delivered to you daily!</b></p> 
+
+        <p style="font-size: 20px;"><b>Choose one of our plans below</b> </p>
+
+
+      </div>
+
+
 
         <div class="row text-center" style="top:100px;">
           <div class="col-md-3" style="border-style: solid; border-color: #000000; width: 23%; float:left; margin: 3.5%">
@@ -454,7 +492,7 @@ background-color: hsl(351, 68%, 11%) !important;
 
     <img src="../static/assets/img/menu10.jpg" style="position: relative;
      top:100px; margin-left: auto;
-  margin-right: auto;display: block; width: 100%; height: 100%;" >
+  margin-right: auto;display: block; width: 100%; height: 100%; border-style: solid; border-color: #000000;" >
 
       </div>
 
@@ -464,7 +502,7 @@ background-color: hsl(351, 68%, 11%) !important;
 
     <img src="../static/assets/img/menu10.jpg" style="position: relative;
      top:100px; margin-left: auto;
-  margin-right: auto;display: block; width: 50%; height: 50%;" >
+  margin-right: auto;display: block; width: 50%; height: 50%; border-style: solid; border-color: #000000;" >
 
       </div>
 
@@ -482,14 +520,33 @@ background-color: hsl(351, 68%, 11%) !important;
     <i class="material-icons">shopping_cart</i>
   </button></div>
 
+  <div>
+
+    <a href="#" class="float">
+      <i style="font-size: 13px;
+      border: none;
+      border-radius: 53%;
+      color: white;
+      width: 50px;
+      height: 50px;
+      transition: transform 2s;
+      font-family: 'Times New Roman', Times, serif;
+      line-height: 8px;">0</i>
+      </a>  
+
+  </div>
+
       <hr>
       <div class="features-2">
         <script src="https://apps.elfsight.com/p/platform.js" defer></script>
 <div class="elfsight-app-16927323-b678-4808-bb88-445037c5fdff" style="position: relative;
 top:100px; margin-left: auto;
-margin-right: auto;display: block; width: 50%; height: 50%;">
+margin-right: auto;display: block; width: 50%; height: 50%; border-style: solid; border-color: #000000;">
 </div>
       </div>
+
+
+  {% if request.MOBILE %}    
 
   <footer class="footer">
     <div class="container">
@@ -514,10 +571,51 @@ margin-right: auto;display: block; width: 50%; height: 50%;">
       </nav>
       <div class="copyright float-right">      
         <p> <b>&copy;  Sondos Ibrahim Mansour Barri Commercial EST CR4030375334</b></p>
+        <img src="../static/assets/img/mc.png">
         
       </div>
     </div>
   </footer>
+  {% else %}
+
+  <hr style="height:2px;border-width:0;color:black;background-color:white;">
+  <hr style="height:2px;border-width:0;color:black;background-color:black;">
+
+
+  <footer class="footer">
+    <div class="container">
+      <nav class="float-left">
+        <ul>
+          <li>
+            <a href="/who-are-we">
+              Who Are We 
+            </a>
+          </li>
+          <li>
+            <a href="/contact-us">
+              Contact Us
+            </a>
+          </li>
+          <li>
+            <a href="/terms-and-conditions">
+              Terms & Conditions
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="copyright float-right">      
+        <p> <b>&copy;  Sondos Ibrahim Mansour Barri Commercial EST CR4030375334</b></p>
+        <div class="row" style="padding-right: 1px; display: block; margin: 0 auto;">
+        <img src="../static/assets/img/mc.png">
+        <img src="../static/assets/img/visa2.png" >
+        </div>
+
+        
+      </div>
+    </div>
+  </footer>
+
+  {% endif %}
   </div>
 </body>
 

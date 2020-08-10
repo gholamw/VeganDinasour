@@ -646,7 +646,8 @@ def shoppingcart():
 	#print("sum of products are: ", sum_of_products)
 	sum_of_products = week_prices + month_prices + day_prices + shipping_cost
 	vat = sum_of_products * 0.15
-	sum_of_products = sum_of_products + vat
+	#sum_of_products = sum_of_products + vat
+	sum_of_products = sum_of_products
 	session['vat'] = vat
 	session['sumOfCart'] = sum_of_products
 	session["customer_delivery"] = status_of_checkbox
