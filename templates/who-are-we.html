@@ -1,27 +1,133 @@
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" sizes="180x180" href="../static/assets/img/vicon-4.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+      The Vegan Dinasour
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- CSS Files -->
+    <link href="../static/assets/css/material-kit.css?v=2.2.0" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="../static/assets/demo/demo.css" rel="stylesheet" />
+    <link href="../static/assets/demo/vertical-nav.css" rel="stylesheet" />
+    <script src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+    <script src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+  
+  
+  
+  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+  <!-- Default theme -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+  <!-- Semantic UI theme -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+  <!-- Bootstrap theme -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+  
+  
+  
+  
+  </head>
+  
 
-<head>
-</head>
-
-<script>
-</script>
-<script>
-
-
-
-var h1 = document.querySelector("h1");
-
-h1.addEventListener("input", function() {
-  this.setAttribute("data-text", this.innerText);
-});
-</script>
-
-<body>
+  <body class="pricing sidebar-collapse" style="background-image: url(../static/assets/img/LONGLIVE10.jpg);">
+    <nav class="navbar navbar-color-on-scroll navbar-transparent    fixed-top  navbar-expand-lg " color-on-scroll="100" id="sectionsNav" style="height:15%; left: 0; right: 0; background-image: url(../static/assets/img/header11.jpg)" >
+      <div class="container">
+        <div class="navbar-translate">
+  
+            <div>
+    <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="position: sticky; top: 0; right: 0; left: 0; transform-origin: top right;">
+  
+      <i class="material-icons">shopping_cart</i> Buy Now
+  </a-->
+  
+    </div>
+          
+          <!--div class="navbar-brand">
+            <-a href="#home" class="active" class="navbar-brand">Home</a>
+            <img src="../static/assets/img/vegan-dino-bg.ico" class="active">
+  
+          </div-->
+  
+          {% if request.MOBILE %}
+  
+          <ul class="navbar-nav mx-auto">
+  
+            <li><img src="../static/assets/img/vegan-dino-bg.ico"></li>
+  
+          </ul>
+  
+          {% else %}
+  
+          <a href="/pricing.html">
+            <img src="../static/assets/img/vegan-dino-bg(2).ico" class="navbar-nav mx-auto" style="position: absolute; right: 0px; left: 0px; top: -12px; transform-origin: top center;">
+          </a>
+          
+  
+          {% endif %}
+          <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="background-color: #94df69; position: absolute; right: 0px; top: 0px; transform-origin: top right;"-->
+  
+  
+              <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="background-color: #94df69; position: absolute; right: auto; top: auto; bottom: auto; left: auto; transform-origin: top right;">
+  
+                  <i class="material-icons">shopping_cart</i> Buy Now
+            </a-->
+          <!--a class="navbar-brand" href="https://demos.creative-tim.com/material-kit-pro/index.html" style="color:black";>
+            The Vegan Dinasour </a-->
+            <!--img src="../static/assets/img/vd-resized.png" width="50" height="40" style="position: relative;
+            top:-40px; margin-left:55px;
+          margin-right: -55px;display: block; width: 50%; height: 50%;" -->
+  
+  
+          <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+            
+              <li class="button-container nav-item iframe-extern">
+                <div>
+  
+  
+                              <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="background-color: #94df69; position: absolute; right: auto; top: auto; bottom: auto; left: auto; transform-origin: top right;">
+  
+                  <i class="material-icons">shopping_cart</i> Buy Now
+            </a-->
+                  
+                  <!--img src="../static/assets/img/vegan-dino-bg.ico"-->
+                  <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="background-color: #94df69; display: block; 
+                  margin-left: 1px; right: -1000px; top: -40px"-->
+  
+                  <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="background-color: #94df69;">
+  
+                  <i class="material-icons">shopping_cart</i> Buy Now
+                  </a-->
+                </div>
+              </li>
+            </ul>
+          </div>
+      
+      
+        </div>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+  
+    <!--div class="main main-raised" style="background-image: url(../static/assets/img/LONGLIVE10.jpg); 
+  
+    "-->
 <!--img src="../static/assets/img/our-story.png"-->
 <!--p class="cloud-text cloud-title">Who is the vegan dinosaur</p>
 <p class="cloud-text attribute">Photo by <a href="https://unsplash.com/photos/Xk0uzYL3lyY?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Setu Anand</a> on <a href="https://unsplash.com/search/photos/coal?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p-->
 
     <!--h1 contenteditable data-text="mm">mm</h1-->
+    <div class="text-center" style="padding-top: 10%;">
     <h1>Who Are We</h1>
 
     <p class="text-center">
@@ -31,14 +137,93 @@ h1.addEventListener("input", function() {
 
     </p>
 
-    <div class="copyright float-right">
-    <p>  موسسة سندس ابراهيم منصور بري التجارية سجل تجاري رقم  انشطة الاسرة باعتبارها مشغلة لافراد الخدمة المنزلية داخل المنزل </p>
+    <div class="copyright float-right text-center">
+    <p> <b>&copy;  موسسة سندس ابراهيم منصور بري التجارية سجل تجاري رقم 4030375334 </b></p>
+    <p>انشطة الاسرة باعتبارها مشغلة لافراد الخدمة المنزلية داخل المنزل</p>
     </div>
 
-    <div class="copyright float-right">      
+    <div class="copyright float-left text-center">      
       <p> <b>&copy;  Sondos Ibrahim Mansour Barri Commercial EST CR4030375334</b></p>
       <p>Establishment activity: activities of house hold as employers of domestic peronnel at home</p>
       </div>
 
+
+
+      
 </body>
+
+{% if request.MOBILE %}    
+
+<footer class="footer">
+  <div class="container">
+    <nav class="float-left">
+      <ul>
+        <li>
+          <a href="/who-are-we">
+            Who Are We 
+          </a>
+        </li>
+        <li>
+          <a href="/contact-us">
+            Contact Us
+          </a>
+        </li>
+        <li>
+          <a href="/terms-and-conditions">
+            Terms & Conditions
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="copyright float-right">      
+      <p> <b>&copy;  Sondos Ibrahim Mansour Barri Commercial EST CR4030375334</b></p>
+      <img src="../static/assets/img/mc.png">
+      
+    </div>
+  </div>
+</footer>
+{% else %}
+
+
+
+<footer class="footer" style=" position : absolute;
+bottom : 0;left: 0;
+    right: 0;"> 
+  <div class="container">
+    <hr style="height:2px;border-width:0;color:black;background-color:black;">
+
+    <nav class="float-left">
+      <ul>
+        <li>
+          <a href="/who-are-we">
+            Who Are We 
+          </a>
+        </li>
+        <li>
+          <a href="/contact-us">
+            Contact Us
+          </a>
+        </li>
+        <li>
+          <a href="/terms-and-conditions">
+            Terms & Conditions
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="copyright float-right">      
+      <p> <b>&copy;  Sondos Ibrahim Mansour Barri Commercial EST CR4030375334</b></p>
+      <div class="row" style="padding-right: 1px; display: block; margin: 0 auto;">
+      <img src="../static/assets/img/mc.png">
+      <img src="../static/assets/img/visa2.png" >
+      </div>
+
+      
+    </div>
+  </div>
+</footer>
+
+{% endif %}
+
+
 </html>

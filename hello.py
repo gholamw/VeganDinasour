@@ -118,50 +118,55 @@ def print_date_time():
     	elif(x.p_type == "Month"):	
     		end_date = plan_date + datetime.timedelta(days=month_days)
     	no_of_days_difference = (end_date - (today_date + datetime.timedelta(days=1))).days
-    	if no_of_days_difference >= 0:
-    		print("inside for/if")
-    		print("PLAN START DATE", plan_date)
-    		if(x.p_type == "Day"):
-    			end_date = plan_date + datetime.timedelta(days=1)
-    		elif(x.p_type == "Week"):
-    			end_date = plan_date + datetime.timedelta(days=week_days)
-    		elif(x.p_type == "Month"):	
-    			end_date = plan_date + datetime.timedelta(days=month_days)
-    		no_of_days_difference = (end_date - (today_date + datetime.timedelta(days=1))).days
-    		#end_date = plan_date + datetime.timedelta(days=30)
-    		print("PLAN END DATE", end_date)
-    		print("DIFFERENCE", no_of_days_difference)
-    		x.is_active = "Active"
-    		x.expiry_date = end_date
-    		db.session.commit()
-    	else:	
-    		print("outside for/if")
-    		print("PLAN DATE", plan_date)
-    		if(x.p_type == "Day"):
-    			end_date = plan_date + datetime.timedelta(days=1)
-    		elif(x.p_type == "Week"):
-    			end_date = plan_date + datetime.timedelta(days=week_days)
-    		elif(x.p_type == "Month"):	
-    			end_date = plan_date + datetime.timedelta(days=month_days)
-    		no_of_days_difference = (end_date - today_date).days
-    		#end_date = plan_date + datetime.timedelta(days=30)
-    		print("PLAN END DATE", end_date)
-    		print("DIFFERENCE", no_of_days_difference)
-    		x.is_active = "Expired"
-    		x.expiry_date = end_date
-    		db.session.commit()
+    	if x.is_active == "Active":
+    		print("££££££££££££££££££££££££££££££££££££££££££££££")
+    		print("Start the daily checks")
+    		if no_of_days_difference >= 0:
+    			print("inside for/if")
+    			print("PLAN START DATE", plan_date)
+    			if(x.p_type == "Day"):
+    				end_date = plan_date + datetime.timedelta(days=1)
+    			elif(x.p_type == "Week"):
+    				end_date = plan_date + datetime.timedelta(days=week_days)
+    			elif(x.p_type == "Month"):	
+    				end_date = plan_date + datetime.timedelta(days=month_days)
+    			no_of_days_difference = (end_date - (today_date + datetime.timedelta(days=1))).days
+				#end_date = plan_date + datetime.timedelta(days=30)
+    			print("PLAN END DATE", end_date)
+    			print("DIFFERENCE", no_of_days_difference)
+    			x.is_active = "Active"
+    			x.expiry_date = end_date
+    			db.session.commit()
+    		else:	
+    			print("outside for/if")
+    			print("PLAN DATE", plan_date)
+    			if(x.p_type == "Day"):
+    				end_date = plan_date + datetime.timedelta(days=1)
+    			elif(x.p_type == "Week"):
+    				end_date = plan_date + datetime.timedelta(days=week_days)
+    			elif(x.p_type == "Month"):	
+    				end_date = plan_date + datetime.timedelta(days=month_days)
+    			no_of_days_difference = (end_date - today_date).days
+				#end_date = plan_date + datetime.timedelta(days=30)
+    			print("PLAN END DATE", end_date)
+    			print("DIFFERENCE", no_of_days_difference)
+    			x.is_active = "Expired"
+    			x.expiry_date = end_date
+    			customer_object = Customer.query.filter_by(mobile=x.customer_mobile).first()
+    			customer_object.number_of_plans = str(int(customer_object.number_of_plans) - 1)
+    			db.session.commit()
 
-    	if plan_date <= today_date <= end_date:
-    		print("Pass")
-    		print("===================================")
-    	else:
-    		print("Dont Pass")
-    		print("===================================")	
-		#print("inside for loop")
-		#x.is_active = False
-		#db.session.commit()
+    		if plan_date <= today_date <= end_date:
+    			print("Pass")
+    			print("===================================")
+    		else:
+    			print("Dont Pass")
+    			print("===================================")	
+			#print("inside for loop")
+			#x.is_active = False
+			#db.session.commit()
 
-    #print(( plan_date - today_date).days)
+		#print(( plan_date - today_date).days)
     return 0
 
 

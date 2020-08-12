@@ -35,61 +35,85 @@
 
     </style>
 
-   <nav class="navbar navbar-dark navbar-expand-md bg-success navigation">
+<body class="pricing sidebar-collapse" >
+  <nav class="navbar navbar-color-on-scroll navbar-transparent    fixed-top  navbar-expand-lg " color-on-scroll="100" id="sectionsNav" style="height:15%; left: 0; right: 0; background-image: url(../static/assets/img/header11.jpg)" >
+    <div class="container">
+      <div class="navbar-translate">
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-nav">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+          <div>
+  <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="position: sticky; top: 0; right: 0; left: 0; transform-origin: top right;">
 
-  <div class="navbar-collapse collapse dual-nav order-1 order-md-0">
-    <ul  class="navbar-nav">
-      <li class="nav-item">
-        <a style = "color: #000000" href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm btn btn-light nav-link">
-            <i class="material-icons">shopping_cart</i> Buy Now
-        </a>
-      </li>
-    </ul>
+    <i class="material-icons">shopping_cart</i> Buy Now
+</a-->
+
   </div>
+        
+        <!--div class="navbar-brand">
+          <-a href="#home" class="active" class="navbar-brand">Home</a>
+          <img src="../static/assets/img/vegan-dino-bg.ico" class="active">
 
-  <div class="navbar-collapse collapse dual-nav order-2 order-md-1 justify-content-end">
-    <ul hidden class="navbar-nav border border-danger">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Center Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Center Link</a>
-      </li>
-    </ul>
-  </div>
+        </div-->
 
-  <a href="/" class="navbar-brand mx-auto order-0 order-md-2 p-2">
+        {% if request.MOBILE %}
 
-    <img src="../static/assets/img/vegan-dino-bg.ico">
+        <ul class="navbar-nav mx-auto">
+
+          <li><img src="../static/assets/img/vegan-dino-bg.ico"></li>
+
+        </ul>
+
+        {% else %}
 
 
-</a>
+          <img src="../static/assets/img/vegan-dino-bg(2).ico" class="navbar-nav mx-auto" style="position: absolute; right: 0px; left: 0px; top: -12px; transform-origin: top center;">
 
-  <div class="navbar-collapse collapse dual-nav order-3 order-md-3">
-    <ul hidden class="navbar-nav border border-danger">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Center Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Center Link</a>
-      </li>
-    </ul>
-  </div>
+        
 
-  <div class="navbar-collapse collapse dual-nav order-4 order-md-4 justify-content-end">
-    <ul hidden class="navbar-nav border border-primary">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Right Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Right Link</a>
-      </li>
-    </ul>
-  </div>
+        {% endif %}
+        <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="background-color: #94df69; position: absolute; right: 0px; top: 0px; transform-origin: top right;"-->
 
-</nav>
+
+            <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="background-color: #94df69; position: absolute; right: auto; top: auto; bottom: auto; left: auto; transform-origin: top right;">
+
+                <i class="material-icons">shopping_cart</i> Buy Now
+          </a-->
+        <!--a class="navbar-brand" href="https://demos.creative-tim.com/material-kit-pro/index.html" style="color:black";>
+          The Vegan Dinasour </a-->
+          <!--img src="../static/assets/img/vd-resized.png" width="50" height="40" style="position: relative;
+          top:-40px; margin-left:55px;
+        margin-right: -55px;display: block; width: 50%; height: 50%;" -->
+
+
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ml-auto">
+          
+            <li class="button-container nav-item iframe-extern">
+              <div>
+
+
+                            <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="background-color: #94df69; position: absolute; right: auto; top: auto; bottom: auto; left: auto; transform-origin: top right;">
+
+                <i class="material-icons">shopping_cart</i> Buy Now
+          </a-->
+                
+                <!--img src="../static/assets/img/vegan-dino-bg.ico"-->
+                <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="background-color: #94df69; display: block; 
+                margin-left: 1px; right: -1000px; top: -40px"-->
+
+                <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="background-color: #94df69;">
+
+                <i class="material-icons">shopping_cart</i> Buy Now
+                </a-->
+              </div>
+            </li>
+          </ul>
+        </div>
+    
+    
+      </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
 </html>

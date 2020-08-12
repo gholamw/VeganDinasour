@@ -172,7 +172,25 @@ div.fixed2 {
 	margin-top:25px;
 }
 
+
+
 </style>
+
+<style type="text/css">
+  @font-face {
+      font-family: "My Custom Font2";
+      src: url(../static/assets/fonts/BurfordRusticBookBold.woff) format("woff");
+  }
+  p.customfont2 { 
+      font-family: "My Custom Font2", Verdana, Tahoma;
+  }
+  h1.customfont2 { 
+      font-family: "My Custom Font2", Verdana, Tahoma;
+  }
+  h2.customfont2 { 
+      font-family: "My Custom Font2", Verdana, Tahoma;
+  }
+  </style>
 <!--style>
 
 
@@ -273,9 +291,7 @@ background-color: hsl(351, 68%, 11%) !important;
 
 
 
-  <div class="main main-raised" style="background-image: url(../static/assets/img/LONGLIVE10.jpg); 
-
-  ">
+  <div class="main main-raised" style="background-image: url(../static/assets/img/LONGLIVE10.jpg);">
 
     <!--img src="../static/assets/img/banner5.png" style="position: relative;
      top:190px; margin-left: auto;
@@ -298,12 +314,23 @@ background-color: hsl(351, 68%, 11%) !important;
         </div>
 
         
+      <div class="text-center">
+
+        <p class="customfont2" style="font-size: 25px;"><b>Healthy and Delicious meals freshly made and delivered to you daily!</b></p> 
+
+        <p class="customfont2" style="font-size: 20px;"><b>Choose one of our plans below</b> </p>
+
+
+      </div>
+
+
+        
           <div class="col-md-4" style="border-style: solid; border-color: #000000;margin: 3.5%; float:left;
           display: block; margin-left: auto; margin-right: auto; ">
             <div class="card card-pricing card-raised card-plain" >
               <div class="card-body">
-                <h2 class="card-category" style="color:black; font-family:impact" >Month</h2>
-                <h1 class="card-title"><small>SAR</small>{{price_objects[2].amount}}<small></small></h1>
+                <h2 class="card-category customfont2" style="color:black;" >Month</h2>
+                <h1 class="card-title customfont2"><small>SAR</small>{{price_objects[2].amount}}<small></small></h1>
                 <ul>
                   <li><b>3</b> Meals a day</li>
                   <li><b>60</b> Meals in total</li>
@@ -320,8 +347,8 @@ background-color: hsl(351, 68%, 11%) !important;
           display: block; margin-left: auto; margin-right: auto;">
             <div class="card card-pricing card-plain card-raised">
               <div class="card-body">
-                <h2 class="card-category" style="color:black; font-family:Trebuchet MS ">Week</h2>
-                <h1 class="card-title"><small>SAR</small>{{price_objects[1].amount}}<small></small></h1>
+                <h2 class="card-category customfont2" style="color:black;">Week</h2>
+                <h1 class="card-title customfont2"><small>SAR</small>{{price_objects[1].amount}}<small></small></h1>
                 <ul>
                   <li><b>3</b> Meals a day</li>
                   <li><b>15</b> Meals in total</li>
@@ -338,8 +365,8 @@ background-color: hsl(351, 68%, 11%) !important;
           display: block; margin-left: auto; margin-right: auto;" >
             <div class="card card-pricing card-plain">
               <div class="card-body">
-                <h2 class="card-category" style="color:black">Day</h2>
-                <h1 class="card-title"><small>SAR</small>{{price_objects[0].amount}}<small></small></h1>
+                <h2 class="card-category customfont2" style="color:black">Day</h2>
+                <h1 class="card-title customfont2"><small>SAR</small>{{price_objects[0].amount}}<small></small></h1>
                 <ul>
                   <li><b>3</b> Meals in total</li>
                   <li><b></b></li>
@@ -357,8 +384,8 @@ background-color: hsl(351, 68%, 11%) !important;
           display: block; margin-left: auto; margin-right: auto;">
             <div class="card card-pricing card-plain">
               <div class="card-body">
-                <h2 class="card-category" style="color:black">Lunch only for a month</h2>
-                <h1 class="card-title"><small>SAR</small>0<small></small></h1>
+                <h2 class="card-category customfont2" style="color:black">Lunch only for a month</h2>
+                <h1 class="card-title customfont2"><small>SAR</small>0<small></small></h1>
                 <ul>
                   <li><b>1</b> Meal a day</li>
                   <li><b>22</b> Meals in total</li>
@@ -386,9 +413,9 @@ background-color: hsl(351, 68%, 11%) !important;
 
       <div class="text-center">
 
-        <p style="font-size: 25px;"><b>Healthy and Delicious meals freshly made and delivered to you daily!</b></p> 
+        <p class="customfont2" style="font-size: 25px;"><b>Healthy and Delicious meals freshly made and delivered to you daily!</b></p> 
 
-        <p style="font-size: 20px;"><b>Choose one of our plans below</b> </p>
+        <p class="customfont2" style="font-size: 20px;"><b>Choose one of our plans below</b> </p>
 
 
       </div>
@@ -399,8 +426,8 @@ background-color: hsl(351, 68%, 11%) !important;
           <div class="col-md-3" style="border-style: solid; border-color: #000000; width: 23%; float:left; margin: 3.5%">
             <div class="card card-pricing card-raised card-plain" >
               <div class="card-body">
-                <h2 class="card-category" style="color:black; font-family:impact" >Month</h2>
-                <h1 class="card-title"><small>SAR</small>{{price_objects[2].amount}}<small></small></h1>
+                <h2 class="card-category customfont2" style="color:black;" >Month</h2>
+                <h1 class="card-title customfont2"><small>SAR</small>{{price_objects[2].amount}}<small></small></h1>
                 <ul>
                   <li><b>3</b> Meals a day</li>
                   <li><b>60</b> Meals in total</li>
@@ -415,8 +442,8 @@ background-color: hsl(351, 68%, 11%) !important;
           <div class="col-md-3" style="border-style: solid; border-color: #000000; width: 23%; float:left; margin: 3.5%">
             <div class="card card-pricing card-plain card-raised">
               <div class="card-body">
-                <h2 class="card-category" style="color:black; font-family:Trebuchet MS ">Week</h2>
-                <h1 class="card-title"><small>SAR</small>{{price_objects[1].amount}}<small></small></h1>
+                <h2 class="card-category customfont2" style="color:black;">Week</h2>
+                <h1 class="card-title customfont2"><small>SAR</small>{{price_objects[1].amount}}<small></small></h1>
                 <ul>
                   <li><b>3</b> Meals a day</li>
                   <li><b>15</b> Meals in total</li>
@@ -432,8 +459,8 @@ background-color: hsl(351, 68%, 11%) !important;
           <div class="col-md-3" style="border-style: solid; border-color: #000000; width: 23%; float:left; margin: 3.5%" >
             <div class="card card-pricing card-plain">
               <div class="card-body">
-                <h2 class="card-category" style="color:black">Day</h2>
-                <h1 class="card-title"><small>SAR</small>{{price_objects[0].amount}}<small></small></h1>
+                <h2 class="card-category customfont2" style="color:black">Day</h2>
+                <h1 class="card-title customfont2"><small>SAR</small>{{price_objects[0].amount}}<small></small></h1>
                 <ul>
                   <li><b>3</b> Meals in total</li>
                   <li><b></b></li>
@@ -467,8 +494,8 @@ background-color: hsl(351, 68%, 11%) !important;
           <div class="col-md-3" style="border-style: solid; border-color: #000000; width: 23%; float:left; margin: 3.5%">
             <div class="card card-pricing card-plain">
               <div class="card-body">
-                <h2 class="card-category" style="color:black">Lunch only for a month</h2>
-                <h1 class="card-title"><small>SAR</small>0<small></small></h1>
+                <h2 class="card-category customfont2" style="color:black">Lunch only for a month</h2>
+                <h1 class="card-title customfont2"><small>SAR</small>0<small></small></h1>
                 <ul>
                   <li><b>1</b> Meal a day</li>
                   <li><b>22</b> Meals in total</li>

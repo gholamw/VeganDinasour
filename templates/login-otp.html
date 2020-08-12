@@ -163,29 +163,83 @@ background-color: hsl(351, 68%, 11%) !important;
 </style-->
 
 
-<body class="pricing sidebar-collapse">
-  <nav class="navbar navbar-color-on-scroll navbar-transparent    fixed-top  navbar-expand-lg " color-on-scroll="100" id="sectionsNav">
+<body class="pricing sidebar-collapse" >
+  <nav class="navbar navbar-color-on-scroll navbar-transparent    fixed-top  navbar-expand-lg " color-on-scroll="100" id="sectionsNav" style="height:15%; left: 0; right: 0; background-image: url(../static/assets/img/header11.jpg)" >
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href="https://demos.creative-tim.com/material-kit-pro/index.html" style="color: black;">
-          The Vegan Dinasour </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="navbar-toggler-icon"></span>
-          <span class="navbar-toggler-icon"></span>
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ml-auto">
+
+          <div>
+  <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="position: sticky; top: 0; right: 0; left: 0; transform-origin: top right;">
+
+    <i class="material-icons">shopping_cart</i> Buy Now
+</a-->
+
+  </div>
         
-          <li class="button-container nav-item iframe-extern">
-          	<div>
-            <a href="https://www.creative-tim.com/product/material-kit-pro?ref=presentation" target="_blank" class="btn     btn-round btn-block " style ="background-color: #94df69;">
-              <i class="material-icons">shopping_cart</i> Buy Now
-            </a>
+        <!--div class="navbar-brand">
+          <-a href="#home" class="active" class="navbar-brand">Home</a>
+          <img src="../static/assets/img/vegan-dino-bg.ico" class="active">
+
+        </div-->
+
+        {% if request.MOBILE %}
+
+        <ul class="navbar-nav mx-auto">
+
+          <li><img src="../static/assets/img/vegan-dino-bg.ico"></li>
+
+        </ul>
+
+        {% else %}
+
+        <a href="/pricing.html">
+
+          <img src="../static/assets/img/vegan-dino-bg(2).ico" class="navbar-nav mx-auto" style="position: absolute; right: 0px; left: 0px; top: -12px; transform-origin: top center;">
+
+        </a>
+
+        {% endif %}
+        <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="background-color: #94df69; position: absolute; right: 0px; top: 0px; transform-origin: top right;"-->
+
+
+            <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="background-color: #94df69; position: absolute; right: auto; top: auto; bottom: auto; left: auto; transform-origin: top right;">
+
+                <i class="material-icons">shopping_cart</i> Buy Now
+          </a-->
+        <!--a class="navbar-brand" href="https://demos.creative-tim.com/material-kit-pro/index.html" style="color:black";>
+          The Vegan Dinasour </a-->
+          <!--img src="../static/assets/img/vd-resized.png" width="50" height="40" style="position: relative;
+          top:-40px; margin-left:55px;
+        margin-right: -55px;display: block; width: 50%; height: 50%;" -->
+
+
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ml-auto">
+          
+            <li class="button-container nav-item iframe-extern">
+              <div>
+
+
+                            <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="background-color: #94df69; position: absolute; right: auto; top: auto; bottom: auto; left: auto; transform-origin: top right;">
+
+                <i class="material-icons">shopping_cart</i> Buy Now
+          </a-->
+                
+                <!--img src="../static/assets/img/vegan-dino-bg.ico"-->
+                <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="background-color: #94df69; display: block; 
+                margin-left: 1px; right: -1000px; top: -40px"-->
+
+                <!--a href="/shoppingcart" target="_blank" class="btn btn-round btn-block btn-sm " style ="background-color: #94df69;">
+
+                <i class="material-icons">shopping_cart</i> Buy Now
+                </a-->
+              </div>
+            </li>
+          </ul>
         </div>
-          </li>
+    
+    
+      </div>
         </ul>
       </div>
     </div>
@@ -194,7 +248,7 @@ background-color: hsl(351, 68%, 11%) !important;
 
 
 
-  <div class="main main-raised">
+  <div class="main main-raised" style="background-image: url(../static/assets/img/LONGLIVE10.jpg); ">
     <div class="container">
       <div class="pricing-2">
         <div class="row">
@@ -272,41 +326,76 @@ if(!checked){
 </script>
 
          
-  <footer class="footer">
-    <div class="container">
-      <nav class="float-left">
-        <ul>
-          <li>
-            <a href="https://www.creative-tim.com">
-              Creative Tim
-            </a>
-          </li>
-          <li>
-            <a href="https://creative-tim.com/presentation">
-              About Us
-            </a>
-          </li>
-          <li>
-            <a href="http://blog.creative-tim.com">
-              Blog
-            </a>
-          </li>
-          <li>
-            <a href="https://www.creative-tim.com/license">
-              Licenses
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <div class="copyright float-right">
-        &copy;
-        <script>
-          document.write(new Date().getFullYear())
-        </script>, made with <i class="material-icons">favorite</i> by
-        <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
-      </div>
+{% if request.MOBILE %}    
+
+<footer class="footer">
+  <div class="container">
+    <nav class="float-left">
+      <ul>
+        <li>
+          <a href="/who-are-we">
+            Who Are We 
+          </a>
+        </li>
+        <li>
+          <a href="/contact-us">
+            Contact Us
+          </a>
+        </li>
+        <li>
+          <a href="/terms-and-conditions">
+            Terms & Conditions
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="copyright float-right">      
+      <p> <b>&copy;  Sondos Ibrahim Mansour Barri Commercial EST CR4030375334</b></p>
+      <img src="../static/assets/img/mc.png">
+      <img src="../static/assets/img/visa2.png" >
+      
     </div>
-  </footer>
+  </div>
+</footer>
+{% else %}
+
+<hr style="height:2px;border-width:0;color:black;background-color:black;">
+
+
+<footer class="footer">
+  <div class="container">
+    <nav class="float-left">
+      <ul>
+        <li>
+          <a href="/who-are-we">
+            Who Are We 
+          </a>
+        </li>
+        <li>
+          <a href="/contact-us">
+            Contact Us
+          </a>
+        </li>
+        <li>
+          <a href="/terms-and-conditions">
+            Terms & Conditions
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="copyright float-right">      
+      <p> <b>&copy;  Sondos Ibrahim Mansour Barri Commercial EST CR4030375334</b></p>
+      <div class="row" style="padding-right: 1px; display: block; margin: 0 auto;">
+      <img src="../static/assets/img/mc.png">
+      <img src="../static/assets/img/visa2.png" >
+      </div>
+
+      
+    </div>
+  </div>
+</footer>
+
+{% endif %}
 
  
   <!--   Core JS Files   -->
