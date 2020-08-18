@@ -146,6 +146,10 @@ input[type=checkbox]:checked + span{
   font-weight:normal !important;
 }
 
+
+
+
+
 </style>
 <!--style>
 
@@ -300,14 +304,17 @@ background-color: hsl(351, 68%, 11%) !important;
                               <i class="material-icons">phone_iphone</i>
                             </span>
                           </div>
-                          <input type="text" class="form-control" placeholder="966XXXXXXXX" name="mobile" required="true">
+                         <div class="container">
+                          <input id="textbox-id" type="text" value="966" class="form-control" placeholder="966XXXXXXXX" name="mobile" required="true">
+                          <label style="color:red" id="divAfterTextBox-id"></label>
+                          </div>
                         </div>
                       </span>
                       <span class="bmd-form-group">
                       </span>
                     </div>
                     <div class="card-footer justify-content-center">
-                      <input type="submit" href="/otp-check" class="btn  btn-round" style ="background-color: #94df69;"></input>
+                      <input type="submit" href="/otp-check" class="btn btn-success  btn-round" ></input>
                     </div>
                   </div>
                 </form>
@@ -316,6 +323,20 @@ background-color: hsl(351, 68%, 11%) !important;
 
 
 <script> 
+
+    var textbox = document.getElementById("textbox-id");
+        divAfterTextBox = document.getElementById("divAfterTextBox-id");
+    
+    textbox.onkeyup = function(){
+        if (textbox.value.length > 12 || textbox.value.length < 12 || textbox.value[0]!="9" ||textbox.value[1] !="6" || textbox.value[2] !="6" || textbox.value[3] !="5"){
+          console.log(textbox.value);
+          console.log(textbox.value[0]);
+          divAfterTextBox.textContent = "ERROR: Incorrect Format";
+        }else{ divAfterTextBox.textContent = "";
+        // divAfterTextBox.textContent = textbox.value.length < 3 ?
+        //    "ERROR" : divAfterTextBox.textContent = "";
+    }
+    }
 
 /*var checked = document.getElementById("chk").checked;
 if(!checked){

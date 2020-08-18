@@ -7,6 +7,83 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
+
+
+  <script>
+
+
+
+function postData3(input) {
+    $.ajax({
+        type: "POST",
+        url: "/customer-login",
+        data: { param: input },
+        success: callbackFunc
+    });
+}
+
+    $(document).ready(function(){
+    $('.editbtn').click(function () {
+                var currentTD = $(this).parents('tr').find('td');
+                //alert('this '+$(this).html() );
+                if ($(this).text().trim() == 'Edit') {
+                    currentTD = $(this).parents('tr').find($("td").not(":nth-child(1)"));
+                    //alert("first if "+currentTD.html());
+                    $.each(currentTD, function () {
+                        $(this).prop('contenteditable', true).css({
+                          'background':'#fff',
+                          'color':'#000'
+  
+                      })
+                    });
+                } else {
+                 // alert("second if "+currentTD.html());
+                   $.each(currentTD, function () {
+                      //alert("second if "+currentTD.html());
+                        $(this).prop('contenteditable', false).removeAttr("style");
+                    });
+                }
+      
+                $(this).html($(this).html() == 'Edit' ? 'Save' : 'Edit')
+                if ($(this).html() == 'Save'){
+                 // alert("third if "+currentTD.html());
+                 $("button").click(function(){
+                  alert("Image width: " + $("input").attr("data"));
+                });
+                
+                //$.post("/customer-login");
+                //postData3('s')
+                
+                  $(this).prop('contenteditable',false)
+
+                }
+      
+            });
+            });
+
+
+
+            
+            $(function(){
+    $('#btn').click(function() {
+        alert("Hello");
+        postData3("1")
+    });
+});
+
+
+function callbackFunc(response) {
+    // do something with the response
+    console.log(response);
+}
+
+</script>
+
 </head>
 
 <body class="pricing sidebar-collapse" style="background-image: url(../static/assets/img/LONGLIVE10.jpg);">
@@ -95,7 +172,7 @@
 
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-    <li><a data-toggle="tab" href="#menu1">Users</a></li>
+    <li><a data-toggle="tab" href="#menu1">Orders</a></li>
     <li><a data-toggle="tab" href="#menu2">Plans</a></li>
     <li><a data-toggle="tab" href="#menu3">Customize website</a></li>
     <li><a data-toggle="tab" href="#menu4">Add customers & Plans</a></li>
@@ -105,38 +182,43 @@
   <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
       <h3>HOME</h3>
+      <a href="{{ url_for('logout') }}" class="btn btn-success btn-sm">Log out</a>
+
     </div>
     <div id="menu1" class="tab-pane fade">
-      <h3>Menu 1</h3>
-      <p>hello1</p>
+      <h3>Orders</h3>
 
 
 
-              <table class="table" id="table1">
+
+
+              <table class="table" id="simpleTable1">
     <thead>
-        <tr>
+        <tr class="text-center">
             <th class="text-center">#</th>
-            <th>Name</th>
-            <th>Mobile Number</th>
-            <th>Number of Plans</th>
-            <th>Number of Bags</th>
-            <th>Delivery</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Mobile Number</th>
+            <th class="text-center">Number of Plans</th>
+            <th class="text-center">Delivery</th>
+            <th class="text-center">Address</th>
+            <th class="text-center">Map Direction Link</th>
 
-            <th class="text-right">Active Plan</th>
         </tr>
     </thead>
     <tbody>
       {% set count = 4 %}
       {% for user in users %}
 
-        <tr bgcolor="#ee4c50">
+        <!--tr bgcolor="#ee4c50"-->
+        <tr class="text-center">
             <td class="text-center">{{ loop.index }}</td>
             {% set count = 100 %}
             <td>{{user.name}}</td>
             <td>{{user.mobile}}</td>
             <td>{{user.number_of_plans}}</td>
-            <td>{{user.number_of_plans}}</td>
             <td>{{user.delivery_option}}</td>
+            <td>{{user.address}}</td>
+            <td>{{user.map_link}}</td>
 
 
 
@@ -145,6 +227,8 @@
         {%endfor%}
     </tbody>
 </table>
+
+<button id="button-excel">Create Excel</button>        
 
 
     </div>
@@ -163,7 +247,6 @@
             <th>Start Date</th>
             <th>Expiry Date</th>
             <th>Status</th>
-            <th>Delivery</th>
 
             <th class="text-right">Actions</th>
         </tr>
@@ -172,21 +255,23 @@
       {% set count = 4 %}
       {% for plan in plans %}
 
-        <tr class="danger">
+        <tr class="danger" >
             <td class="text-center">{{ loop.index }}</td>
             <td>{{plan.customer_name}}</td>
             <td>{{plan.start_date}}</td>
-            <td>{{plan.expiry_date}}</td>
+            <td class="editable"  onclick="myFunction()">
+              <input type="text hidden" value= "{{plan.expiry_date}}" id="datepicker{{loop.index}}"  class = "datepicker" name="edit" data = "{{plan.id}}"></td>
             <td class="danger">{{plan.is_active}}</td>
-            <td>{{plan.delivery_option}}</td>
-            <td class="td-actions text-right">
 
-                <button type="button" rel="tooltip" class="btn btn-success">
-                    <i class="material-icons">Edit</i>
-                </button>
-                <button type="button" rel="tooltip" class="btn btn-danger">
-                    <i class="material-icons">Cancel</i>
-                </button>
+            <td contenteditable="false" class="td-actions text-right">
+
+                <!--button type="button" rel="tooltip" class="btn btn-success editbtn">
+                    <i class="material-icons">Edt</i>
+                </button-->
+                <a href="{{ url_for('cancelPlan', plan_id = plan.id) }}" class="btn btn-danger btn-sm">Cancel</a>
+
+                <a href="{{ url_for('editPlan', plan_id = plan.id) }}" class="btn btn-success btn-sm">Edit</a>
+
             </td>
         </tr>
         {%endfor%}
@@ -250,5 +335,48 @@
 } );
 </script>
 </script>
+
+<script>
+  function myFunction() {
+    //alert("I am an alert box!");
+  }
+
+  $(function() {
+    $(".editable").click(function() {
+        if ($(this).attr("contentEditable") == "true") {
+            $( "#hello" ).show();
+            alert("yes");
+            //$( ".datepicker" ).datepicker().show();
+            $(this).parent().find('.datepicker').focus();
+        } else {
+            alert("no");
+          $( "#hello" ).hide(); 
+        }
+    });
+});
+
+
+
+
+$('.datepicker').datepicker({
+    dateFormat: 'yy-dd-mm',
+    onClose: function(dateText, inst) {
+        // When the date is selected, copy the value in the content editable div.
+        // If you don't need to do anything on the blur or focus event of the content editable div, you don't need to trigger them as I do in the line below.
+        $(this).parent().find('.edir').focus().html(dateText).blur();
+    }
+});
+
+let button = document.querySelector("#button-excel");
+
+button.addEventListener("click", e => {
+  let table = document.querySelector("#simpleTable1");
+  TableToExcel.convert(table);
+});
+
+  </script>
+
+
+
 
 </html>

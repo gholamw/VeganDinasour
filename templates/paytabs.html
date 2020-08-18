@@ -10,10 +10,10 @@
     <script type="text/javascript">
         Paytabs.initWithIframe(document.body,{
           settings: {
-            secret_key: "n9qAfTSeLpkQZWkF1p7hUwh0MRh5Ily5uZGJTzYEZivYePDffLxahOa4Fr9oMIuhIa0BKYgJhLIvBmLR7i1o7ctNEDbqmFI4QIFB",
-            merchant_id: "10060203",
-            url_redirect: "http://127.0.0.1:5000/pricing.html",
-            amount: "2.0",
+            secret_key: "NnvwyHjhEsfRsmHNq5nmRXguDCK3pQwcd2IMK14otjfWGXK627tT4JoHl9LKZhXdkF04G4saoI74FRbIYEB2o0KJavu9Nrn77ncN",
+            merchant_id: "10066432",
+            url_redirect: "https://www.vegandinosaur.com/invoice",
+            amount: "{{total}}",
             title: "vegan dino products",
             currency: "SAR",
             product_names: "test test",
@@ -23,16 +23,16 @@
             ui_show_header: "true"
           },
           customer_info: {
-            first_name: "Wessam",
-            last_name: "Gholam",
-            phone_number: "0502014844",
-            email_address: "gholamw@tcd.ie",
+            first_name: "{{customer_name}}",
+            last_name: "",
+            phone_number: "{{customer_mobile}}",
+            email_address: "",
             country_code: "966"
           },
           billing_address: {
-            full_address: "faisaliya",
+            full_address: "",
             city: "Jeddah",
-            state: "Jeddah",
+            state: "Makkah",
             country: "SAU",
             postal_code: "21488"
           }

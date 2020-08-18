@@ -181,6 +181,11 @@ div.fixed2 {
       font-family: "My Custom Font2";
       src: url(../static/assets/fonts/BurfordRusticBookBold.woff) format("woff");
   }
+
+  @font-face {
+      font-family: "My Custom Font3";
+      src: url(../static/assets/fonts/Montserrat-Black.otf) format("opentype");
+  }
   p.customfont2 { 
       font-family: "My Custom Font2", Verdana, Tahoma;
   }
@@ -189,6 +194,14 @@ div.fixed2 {
   }
   h2.customfont2 { 
       font-family: "My Custom Font2", Verdana, Tahoma;
+  }
+
+  li.customfont3 { 
+      font-family: "My Custom Font3", Verdana, Tahoma;
+  }
+
+  li.customfont2 { 
+      font-family: "My Custom Font3", Verdana, Tahoma;
   }
   </style>
 <!--style>
@@ -379,28 +392,7 @@ background-color: hsl(351, 68%, 11%) !important;
               </div>
             </div>
           </div>
-
-          <div class="col-md-4" style="border-style: solid; border-color: #000000; float:left; margin: 3.5%;
-          display: block; margin-left: auto; margin-right: auto;">
-            <div class="card card-pricing card-plain">
-              <div class="card-body">
-                <h2 class="card-category customfont2" style="color:black">Lunch only for a month</h2>
-                <h1 class="card-title customfont2"><small>SAR</small>0<small></small></h1>
-                <ul>
-                  <li><b>1</b> Meal a day</li>
-                  <li><b>22</b> Meals in total</li>
-                </ul> 
-                <a href="#pablo" class="btn  btn-raised btn-round" style ="background-color: #94df69;">
-                  Get Started
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-         
-       
+                 
       {% else %}
       <div>
 
@@ -422,41 +414,47 @@ background-color: hsl(351, 68%, 11%) !important;
 
 
 
-        <div class="row text-center" style="top:100px;">
-          <div class="col-md-3" style="border-style: solid; border-color: #000000; width: 23%; float:left; margin: 3.5%">
+        <div class="row text-center" style="top:100px; display: flex; justify-content: center;">
+          <div class="col-md-4 offset-md-10" style="border-style: solid; border-color: #000000; width: 23%; float:left; margin: 3.5%">
             <div class="card card-pricing card-raised card-plain" >
               <div class="card-body">
                 <h2 class="card-category customfont2" style="color:black;" >Month</h2>
                 <h1 class="card-title customfont2"><small>SAR</small>{{price_objects[2].amount}}<small></small></h1>
                 <ul>
-                  <li><b>3</b> Meals a day</li>
-                  <li><b>60</b> Meals in total</li>
+                  <li><b></b> 20 days in total</li>
+                  <li class="customfont2"><b>INCLUDES :</b></li>
+                  <li><b></b> 2 main meals</li>
+                  <li><b></b> 2 fresh salads</li>
+                  <li><b></b> 1 Protin bar</li>
                 </ul>
-                <a onClick="changeText2('button2', 'Added to cart ✓', 'Add to cart');" id="button2" class="btn  btn-raised btn-round" 
-                style ="background-color: #94df69;" href="#pablo">
+                <a onClick="changeText2('button2', 'Added to cart ✓', 'Add to cart');" id="button2" class="btn btn-success  btn-raised btn-round" 
+                 href="#pablo">
                   Add to cart
                 </a>
               </div>
             </div>
           </div>
-          <div class="col-md-3" style="border-style: solid; border-color: #000000; width: 23%; float:left; margin: 3.5%">
+          <div class="col-md-4  offset-md-10" style="border-style: solid; border-color: #000000; width: 23%; float:left; margin: 3.5%">
             <div class="card card-pricing card-plain card-raised">
               <div class="card-body">
                 <h2 class="card-category customfont2" style="color:black;">Week</h2>
                 <h1 class="card-title customfont2"><small>SAR</small>{{price_objects[1].amount}}<small></small></h1>
                 <ul>
-                  <li><b>3</b> Meals a day</li>
-                  <li><b>15</b> Meals in total</li>
+                  <li ><b></b> 5 days in total</li>
+                  <li class="customfont2"><b>INCLUDES :</b></li>
+                  <li><b></b>2 main meals</li>
+                  <li><b></b>2 fresh salads</li>
+                  <li><b></b>1 Protin bar</li>
                 </ul>
-                <a onClick="changeText3('button3', 'Added to cart ✓', 'Add to cart');" id="button3" class="btn btn-raised btn-round"
-                  style ="background-color: #94df69;" href="#pablo">
+                <a onClick="changeText3('button3', 'Added to cart ✓', 'Add to cart');" id="button3" class="btn btn-success btn-raised btn-round"
+                   href="#pablo">
                   Add to cart
                 </a>
               </div>
             </div>
           </div>
 
-          <div class="col-md-3" style="border-style: solid; border-color: #000000; width: 23%; float:left; margin: 3.5%" >
+          <!--div class="col-md-3" style="border-style: solid; border-color: #000000; width: 23%; float:left; margin: 3.5%" >
             <div class="card card-pricing card-plain">
               <div class="card-body">
                 <h2 class="card-category customfont2" style="color:black">Day</h2>
@@ -472,7 +470,7 @@ background-color: hsl(351, 68%, 11%) !important;
 
               </div>
             </div>
-          </div>
+          </div-->
 
 
         </div>
@@ -487,29 +485,6 @@ background-color: hsl(351, 68%, 11%) !important;
               </div>
             </div>
           </div>
-
-
-
-
-          <div class="col-md-3" style="border-style: solid; border-color: #000000; width: 23%; float:left; margin: 3.5%">
-            <div class="card card-pricing card-plain">
-              <div class="card-body">
-                <h2 class="card-category customfont2" style="color:black">Lunch only for a month</h2>
-                <h1 class="card-title customfont2"><small>SAR</small>0<small></small></h1>
-                <ul>
-                  <li><b>1</b> Meal a day</li>
-                  <li><b>22</b> Meals in total</li>
-                </ul> 
-                <a href="#pablo" class="btn  btn-raised btn-round" style ="background-color: #94df69;">
-                  Get Started
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
 
 
       </div>
@@ -528,7 +503,7 @@ background-color: hsl(351, 68%, 11%) !important;
       <div class="features-2">
 
     <img src="../static/assets/img/menu10.jpg" style="position: relative;
-     top:100px; margin-left: auto;
+     top:-20px; margin-left: auto;
   margin-right: auto;display: block; width: 50%; height: 50%; border-style: solid; border-color: #000000;" >
 
       </div>
@@ -549,7 +524,7 @@ background-color: hsl(351, 68%, 11%) !important;
 
   <div>
 
-    <a href="#" class="float">
+    <a href="#" class="float cart-counter">
       <i style="font-size: 13px;
       border: none;
       border-radius: 53%;
@@ -558,7 +533,7 @@ background-color: hsl(351, 68%, 11%) !important;
       height: 50px;
       transition: transform 2s;
       font-family: 'Times New Roman', Times, serif;
-      line-height: 8px;">0</i>
+      line-height: 8px;">{{sum_of_plans}}</i>
       </a>  
 
   </div>
@@ -567,87 +542,91 @@ background-color: hsl(351, 68%, 11%) !important;
       <div class="features-2">
         <script src="https://apps.elfsight.com/p/platform.js" defer></script>
 <div class="elfsight-app-16927323-b678-4808-bb88-445037c5fdff" style="position: relative;
-top:100px; margin-left: auto;
+top:-10px; margin-left: auto;
 margin-right: auto;display: block; width: 50%; height: 50%; border-style: solid; border-color: #000000;">
 </div>
       </div>
 
 
-  {% if request.MOBILE %}    
+      {% if request.MOBILE %}    
 
-  <footer class="footer">
-    <div class="container">
-      <nav class="float-left">
-        <ul>
-          <li>
-            <a href="/who-are-we">
-              Who Are We 
-            </a>
-          </li>
-          <li>
-            <a href="/contact-us">
-              Contact Us
-            </a>
-          </li>
-          <li>
-            <a href="/terms-and-conditions">
-              Terms & Conditions
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <div class="copyright float-right">      
-        <p> <b>&copy;  Sondos Ibrahim Mansour Barri Commercial EST CR4030375334</b></p>
-        <img src="../static/assets/img/mc.png">
-        
-      </div>
-    </div>
-  </footer>
-  {% else %}
-
-  <hr style="height:2px;border-width:0;color:black;background-color:white;">
-  <hr style="height:2px;border-width:0;color:black;background-color:black;">
-
-
-  <footer class="footer">
-    <div class="container">
-      <nav class="float-left">
-        <ul>
-          <li>
-            <a href="/who-are-we">
-              Who Are We 
-            </a>
-          </li>
-          <li>
-            <a href="/contact-us">
-              Contact Us
-            </a>
-          </li>
-          <li>
-            <a href="/terms-and-conditions">
-              Terms & Conditions
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <div class="copyright float-right">      
-        <p> <b>&copy;  Sondos Ibrahim Mansour Barri Commercial EST CR4030375334</b></p>
-        <div class="row" style="padding-right: 1px; display: block; margin: 0 auto;">
-        <img src="../static/assets/img/mc.png">
-        <img src="../static/assets/img/visa2.png" >
+      <footer class="footer">
+        <div class="container">
+          <nav class="float-left">
+            <ul>
+              <li>
+                <a href="/who-are-we">
+                  Who Are We 
+                </a>
+              </li>
+              <li>
+                <a href="/contact-us">
+                  Contact Us
+                </a>
+              </li>
+              <li>
+                <a href="/terms-and-conditions">
+                  Terms & Conditions
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div class="copyright float-right">      
+            <p> <b>&copy;  Sondos Ibrahim Mansour Barri Commercial EST CR4030375334</b></p>
+            <img src="../static/assets/img/mc.png">
+            
+          </div>
         </div>
-
-        
-      </div>
-    </div>
-  </footer>
-
-  {% endif %}
+      </footer>
+      {% else %}
+      
+      
+      
+      <footer class="footer" style=" position : absolute;
+      bottom : 0;left: 0;
+          right: 0;"> 
+        <div class="container">
+          <hr style="height:2px;border-width:0;color:black;background-color:black;">
+      
+          <nav class="float-left">
+            <ul>
+              <li>
+                <a href="/who-are-we">
+                  Who Are We 
+                </a>
+              </li>
+              <li>
+                <a href="/contact-us">
+                  Contact Us
+                </a>
+              </li>
+              <li>
+                <a href="/terms-and-conditions">
+                  Terms & Conditions
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div class="copyright float-right">      
+            <p> <b>&copy;  Sondos Ibrahim Mansour Barri Commercial EST CR4030375334</b></p>
+            <div class="row" style="padding-right: 1px; display: block; margin: 0 auto;">
+            <img src="../static/assets/img/mc.png">
+            <img src="../static/assets/img/visa2.png" >
+            </div>
+      
+            
+          </div>
+        </div>
+      </footer>
+      
+      {% endif %}
   </div>
 </body>
 
 
           <script>
+            
+    var counts = parseInt('{{sum_of_plans}}', 10);;        
     function changeText(button, text, textToChangeBackTo) {
       buttonId = document.getElementById(button);
       buttonId.textContent = text;
@@ -658,7 +637,7 @@ margin-right: auto;display: block; width: 50%; height: 50%; border-style: solid;
       }, 2000);
       postData('data to process');
       //alertify.set('notifier','position', 'top-center');
-      alertify.success('Product added to cart');
+      //##alertify.success('Product added to cart');
 
     }
 
@@ -671,7 +650,7 @@ margin-right: auto;display: block; width: 50%; height: 50%; border-style: solid;
         console(document.getElementsByClassName("btn-success")[0].style.backgroundColor);
       }, 2000);
       postData2('data to process');
-      alertify.success('Product Added to Cart');
+      //##alertify.success('Product Added to Cart');
 
     }
 
@@ -684,7 +663,7 @@ margin-right: auto;display: block; width: 50%; height: 50%; border-style: solid;
         console(document.getElementsByClassName("btn-success")[0].style.backgroundColor);
       }, 2000);
       postData3('data to process');
-      alertify.success('Product Added to Cart');
+      //##alertify.success('Product Added to Cart');
 
     }
 
@@ -695,25 +674,64 @@ margin-right: auto;display: block; width: 50%; height: 50%; border-style: solid;
 
 
     function postData(input) {
+      counts += +1;
+      $(".cart-counter").animate({
+   //show span with number
+                opacity: 1
+            }, 300, function () {
+   //write number of counts into span
+                $(this).text(counts);
+            });
+    console.log(counts);          
     $.ajax({
         type: "POST",
         url: "/updatecart",
-        data: { param: input },
+        data: { param: input, counter: counts },
         success: callbackFunc
     });
 }
 
     function postData2(input) {
+      
+      counts += +1;
+      $(".cart-counter").animate({
+   //show span with number
+                opacity: 1
+            }, 300, function () {
+   //write number of counts into span
+                $(this).text(counts);
+            });
+    console.log(counts);        
     $.ajax({
         type: "POST",
         url: "/updatecart2",
         data: { param: input },
         success: callbackFunc
     });
+
+}
+
+function updateConsole() {
+    $.ajax({
+        type: "POST",
+        url: "/updateConsole",
+        data: { param: input },
+        success: callbackFunc
+    });
 }
 
 
+
     function postData3(input) {
+      counts += +1;
+      $(".cart-counter").animate({
+   //show span with number
+                opacity: 1
+            }, 300, function () {
+   //write number of counts into span
+                $(this).text(counts);
+            });
+    console.log(counts);          
     $.ajax({
         type: "POST",
         url: "/updatecart3",

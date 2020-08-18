@@ -272,9 +272,9 @@ background-color: hsl(351, 68%, 11%) !important;
   <div class="row justify-content-center">
     <thead>
         <tr>
-            <th class="text-center" style ="background-color: #94df69; color:white"><strong>Quantity</strong></th>
-            <th class="text-center" style ="background-color: #94df69; color:white"><strong>Plan Type</strong></th>
-            <th class="text-center" style ="background-color: #94df69; color:white"><strong>Plan Price</strong></th>
+            <th class="text-center" style ="background-color: #47944b; color:white"><strong>Quantity</strong></th>
+            <th class="text-center" style ="background-color: #47944b; color:white"><strong>Plan Type</strong></th>
+            <th class="text-center" style ="background-color: #47944b; color:white"><strong>Plan Price</strong></th>
         </tr>
     </thead>
     <tbody>
@@ -432,8 +432,8 @@ if(!checked){
 
 </script>
 
-                <a class="btn  btn-raised btn-round" 
-                style ="background-color: #94df69;" href="signupDay">
+                <a class="btn btn-success  btn-raised btn-round" 
+                 href="signupDay">
                   Proceed
                 </a>
 
@@ -651,7 +651,7 @@ var closable = alertify.alert().setting('closable');
 alertify.alert()
   .setting({
     'label':'Cool',
-    'message': 'Meals will not be delivered, you will have to pick it up yourself.' ,
+    'message': 'Please note by unclicking this button, you will have to pick up your meals from our location in Al-Naeem district, Jeddah which will be sent to you.' ,
     'onok': function(){ alertify.error('Delivery option not selected'); location.reload();}
   }).show();
 
