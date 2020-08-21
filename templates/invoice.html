@@ -244,6 +244,7 @@ $('#printInvoice').click(function(){
                         </tr>
                     </thead>
                     <tbody>
+                    {% if month_plans > 0 %}
                         <tr>
                             <td class="no">1</td>
                             <td class="text-left"><h3>
@@ -256,6 +257,8 @@ $('#printInvoice').click(function(){
                             <td class="qty">{{month_plans}}</td>
                             <td class="total">SAR {{month_total}}</td>
                         </tr>
+                    {% endif %}   
+                    {% if week_plans > 0 %} 
                         <tr>
                             <td class="no">2</td>
                             <td class="text-left"><h3><a style="color:#47944b" target="_blank" href="">Week Plan</a></h3></td>
@@ -263,8 +266,14 @@ $('#printInvoice').click(function(){
                             <td class="qty">{{week_plans}}</td>
                             <td class="total">SAR {{week_total}}</td>
                         </tr>
+                    {% endif %}    
                     </tbody>
                     <tfoot>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td colspan="2">Delivery</td>
+                            <td>SAR {{shipping_cost}}</td>
+                        </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="2">SUBTOTAL</td>
@@ -285,7 +294,7 @@ $('#printInvoice').click(function(){
                 <div class="thanks">Thank you!</div>
                 <div class="notices">
                     <div>NOTICE:</div>
-                    <div class="notice">Some notes mansour may want to add!.</div>
+                    <div class="notice">Thank you, enjoy your delicious meals.</div>
                 </div>
             </main>
             <footer>

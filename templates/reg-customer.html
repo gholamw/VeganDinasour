@@ -1,0 +1,259 @@
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!--  Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+  <script src="../static/assets/js/plugins/bootstrap-tagsinput.js"></script>
+  <!--  Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+  <script src="../static/assets/js/plugins/bootstrap-selectpicker.js" type="text/javascript"></script>
+  <!--  Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+  <script src="../static/assets/js/plugins/jasny-bootstrap.min.js" type="text/javascript"></script>
+  <script src="../static/assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+  <script src="../static/assets/js/plugins/moment.min.js"></script>
+  <!--  Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+  <script src="../static/assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+
+
+    </head>
+
+    <script language="javascript">
+        //alert("{{blocked_dates[2]}}")
+        var nn = "{{blocked_dates[3]}}"
+        //alert(nn)
+        var array = ["2020-10-27","2020-11-17","2021-01-01","2022-01-01", "{{blocked_dates[2]}}", "2020-06-30"]
+        //alert("{{blocked_dates}}")
+        {% for bd in blocked_dates %}
+          array.push("{{bd}}")
+        {% endfor %}  
+  
+        //alert(array)
+          $(document).ready(function () {
+              $("#datepicker").datepicker({
+                beforeShowDay: function(date){
+                    var day = date.getDay();
+                    var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                    return [ day != 5 && day != 6 && array.indexOf(string) == -1, 'highlight', "Available" ]
+                },
+                  firstDay: 0,
+                  minDate: 0,
+                  showOtherMonths: true,
+                  selectOtherMonths: true,
+                  autoclose: true,
+                  changeMonth: true,
+                  changeYear: true,
+                  showAnim: "slideDown",
+                  showOptions: {direction: "up"}
+                  
+              });
+  
+          });
+    </script>
+
+    <style>
+        /* Stlyes to make the demo easier to see: */
+        html{
+            height: 100%;
+            }
+            
+        body { 
+        margin: 0; 
+        display: grid;
+        height: 100%;
+        grid-template-areas:
+                "header_section"
+                "Site-content_section";
+        grid-template-rows: 100px 100%  /* 100px for header, 100% for content section, 50px for footer */
+        }
+        .header { 
+        grid-area: header_section;
+        background-image: url(../static/assets/img/header11.jpg);
+        }
+        .Site-content { 
+        grid-area: Site-content_section;
+        background-image: url(../static/assets/img/LONGLIVE10.jpg);
+        }
+        .footer {
+        grid-area: footer_section;
+        background-color: #049e8c;
+        }
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        form{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            display:table;/* shrinks to fit content */
+            margin:auto;
+        }
+
+        .blue-highlight {
+    background-color: green !important;
+    color: green !important;
+}
+
+.highlight a{
+  background-color: #29f274 !important;
+  color: #ffffff !important;
+}
+.ui-datepicker td.ui-state-disabled>span{background:#FA8072;}
+.ui-datepicker td.ui-state-disabled{opacity:100;}
+
+.box{
+  width:20px;
+  height:20px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.explanation {
+    margin-left: 5px;
+    vertical-align: middle;
+}
+.red{
+  background:#FA8072;
+}
+.green{
+  background:#0f0;
+}
+.blue{
+  background:#00f;
+}
+
+ul {
+    margin: 20px;
+}
+
+.input-color {
+    position: relative;
+}
+.input-color input {
+    padding-left: 20px;
+}
+.input-color .color-box {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    background-color: #ccc;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+}
+
+
+    </style>
+
+<style>.ui-datepicker {font-size:70%; }</style>
+ 
+
+<body>
+    <div class= "header">
+        <img src="../static/assets/img/vegan-dino-bg.ico">
+    </div>
+    <div class="Site-content">
+        <form class="form" method="POST" action="/reg-form">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Full Name</label>
+              <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Start date</label>
+                <input type="text" id="datepicker" data-provide="datepicker" name="datepicker" class="form-control" aria-describedby="emailHelp" placeholder="Choose start date">
+                <small id="emailHelp" class="form-text text-muted">Please pick date from datepicker.</small>
+              </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Mobile Number</label>
+                <input type="text" name="mobile" value="966" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter mobile number">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Seconday Mobile Number (Optional) </label>
+                <input type="text" name="2mobile" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter secondary mobile number">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Meal Instructions</label>
+                <textarea class="form-control" name="instructions" id="exampleFormControlTextarea1" rows="1"></textarea>
+            </div>  
+            <div class="form-group">
+                <label for="exampleInputEmail1">Delivery Instructions</label>
+                <textarea class="form-control" name= "instruction2" id="exampleFormControlTextarea1" rows="1"></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+          </form>
+    </div>
+    <!--div class= "footer">Footer</div-->
+  </body>
+    <!--nav class="navbar navbar-color-on-scroll navbar-transparent    fixed-top  navbar-expand-lg " color-on-scroll="100" id="sectionsNav" style="height:15%; left: 0; right: 0; background-image: url(../static/assets/img/header11.jpg)" >
+        <div class="container">
+          <div class="navbar-translate">
+    
+              <div>
+
+      </div>
+    
+            {% if request.MOBILE %}
+    
+            <ul class="navbar-nav mx-auto">
+    
+              <li><img src="../static/assets/img/vegan-dino-bg.ico"></li>
+    
+            </ul>
+    
+            {% else %}
+    
+            <a href="/pricing.html">
+              <img src="../static/assets/img/vegan-dino-bg(2).ico" class="navbar-nav mx-auto" style="position: absolute; right: 0px; left: 0px; top: -12px; transform-origin: top center;">
+            </a>
+            
+    
+            {% endif %}
+    
+    
+        
+        
+          </div>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    <body style= "background-image: url(../static/assets/img/LONGLIVE10.jpg);">
+        <form>  
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
+
+    </body-->
+
+
+
+
+</html>

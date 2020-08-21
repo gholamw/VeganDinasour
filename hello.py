@@ -1,11 +1,11 @@
 from flask import Flask,request, url_for, redirect, render_template, session
-from pypaytabs import Paytabs
-from pypaytabs import Utilities as util
+#from pypaytabs import Paytabs
+#from pypaytabs import Utilities as util
 #import moyasar
 #import braintree
 from werkzeug.datastructures import ImmutableOrderedMultiDict
 import requests
-from flask_mysqldb import MySQL
+#from flask_mysqldb import MySQL
 #from MySQL import escape_string as thwart
 #from passlib.hash import sha256_crypt
 from flask import Flask
@@ -35,7 +35,7 @@ from datetime import date, timedelta
 #from twilio.rest import TwilioRestClient
 #from datetime import datetime
 import math, random 
-from apscheduler.schedulers.background import BackgroundScheduler
+#from apscheduler.schedulers.background import BackgroundScheduler
 from collections import Counter
 
 #from flask_wtf import FlaskForm
@@ -214,12 +214,19 @@ def _run_on_start():
     price_week= Prices(p_type = "Week", amount = 200)
     #db.session.add(p_week)
     price_month= Prices(p_type = "Month", amount = 1850)
+
+    ####delivery_month = DeliveryPrices(p_type = "Month", amount=200)
+    #####delivery_week = DeliveryPrices(p_type = "Week", amount=100)
+    #####db.session.add(delivery_month)
+    #####db.session.add(delivery_week)
+    #db.session.commit()
+
     #db.session.add(p_month)
     #db.session.commit()
-    ##db.session.add(price_day)
-    ##db.session.add(price_week)
-    ##db.session.add(price_month)
-    ##db.session.commit()
+    ######db.session.add(price_day)
+    ######db.session.add(price_week)
+    ######db.session.add(price_month)
+    ######db.session.commit()
     print("showing all prices:!!!")
     price_object = Prices.query.all()
     print(price_object)
@@ -281,6 +288,9 @@ def before_request():
     		print()	
         #return redirect(url_for('login'))    
 
+    print("day: ", session.get('dayPlan'))
+    print("week: ", session.get('weekPlan'))
+    print("month: ", session.get('monthPlan'))
 	#_day = Product(price_object[0].p_type, price_object[0].amount)
 	#p_week = Product(price_object[1].p_type, price_object[1].amount)
 	#p_month = Product(price_object[2].p_type, price_object[2].amount)
@@ -295,9 +305,9 @@ def hello():
 	list_of_products=[]
 	session['shop'] = list_of_products	
 	
-	##user = User(email="admin", name="Mansour Barri",admin=True, password="123")
-	##db.session.add(user)
-	##db.session.commit()
+	#####user = User(email="admin", name="Mansour Barri",admin=True, password="123")
+	#####db.session.add(user)
+	####db.session.commit()
 	print("User admin:")
 	print(User.query.all())
 
@@ -326,6 +336,13 @@ def hello():
 	#user = User(email="admin", name="Mansour",admin=True, password="123")
 	#db.session.add(user)
 	#db.session.commit()
+	###customer = Customer.query.filter_by(mobile="966567248219").first()
+	###db.session.delete(customer)
+	###db.session.commit()
+	#db.session.query(Plan4).delete()
+	#db.session.commit()
+	#db.session.query(Customer).delete()
+	#db.session.commit()
 
 	print("Cart has: ", cartItem.products)
 	print("Product: ", p_day)
@@ -334,7 +351,9 @@ def hello():
 	month_plans = session.get('monthPlan')
 	week_plans = session.get('weekPlan')
 	sum_of_plans = str(int(month_plans) + int(week_plans))
-
+	print("day: ", session.get('dayPlan'))
+	print("week: ", session.get('weekPlan'))
+	print("month: ", session.get('monthPlan'))
 	session['logged_in'] = False
 	if session['logged_in'] == False:
 		session['logged_in'] = False
@@ -353,13 +372,101 @@ def pricing():
 def menu():
 	return render_template('menu.html')
 
+def addCustomer():
+	name= session.get('customer_full_name')
+	start_date = session.get('cutomer_start_date')
+	mobile = session.get('customer_mobile')
+	mobile2 = session.get('customer_2_mobile')
+	meal_instruction = session.get('m_instructions')
+	delivery_instruction = session.get('d_instruction')
+	address = session.get('customer_address')
+	longitude = session.get('longitude')
+	latitude = session.get('latitude')
+	map_link = session.get('map_link')
+	status_of_checkbox = session.get('checkbox')
+
+	day_plans = session.get('dayPlan')
+	week_plans = session.get('weekPlan')
+	month_plans = session.get('monthPlan')
+
+	total_plans = str(int(day_plans) + int(week_plans) + int(month_plans))
+
+	customer = Customer(mobile=mobile, name=name,number_of_plans = total_plans,
+	number_of_bags = total_plans , special_customer = "No",address = address, 
+	delivery_option = status_of_checkbox, longitude=longitude, latitude=latitude, map_link=map_link,order_details = meal_instruction, delivery_details= delivery_instruction)
+	db.session.add(customer)
+	db.session.commit()
+	return customer
+
+def addPlans(customer):
+	name= session.get('customer_full_name')
+	start_date = session.get('cutomer_start_date')
+	mobile = session.get('customer_mobile')
+	mobile2 = session.get('customer_2_mobile')
+	meal_instruction = session.get('m_instructions')
+	delivery_instruction = session.get('d_instruction')
+	address = session.get('customer_address')
+	longitude = session.get('longitude')
+	latitude = session.get('latitude')
+	map_link = session.get('map_link')
+	status_of_checkbox = session.get('checkbox')
+
+	day_plans = session.get('dayPlan')
+	week_plans = session.get('weekPlan')
+	month_plans = session.get('monthPlan')
+
+	date_array = start_date.split("/")
+	day = date_array[1]
+	day_int = int(day)
+	month = date_array[0]
+	month_int = int(month)
+	year = date_array[2]
+	year_int = int(year)
+
+	date = datetime.datetime(year_int, month_int, day_int, 0, 0)
+	#date_time_obj = datetime.datetime.strptime(start_date, '%Y-%m-%d %H:%M:%S.%f')
+	print('Type of start date!')
+	#print(type(date_time_obj))
+	print(start_date)
+	print(date)
+	#for loop for Day 
+	customer_name = session.get('current_signup_customer_name')
+	for i in range(day_plans):
+		plan = Plan4(customer_mobile=mobile, customer_name = name,  start_date=date, p_type = "Day", is_active = "Active", expiry_date= date, number_of_pauses = 0, customer = customer)
+		db.session.add(plan)
+
+	#for loop for Week 
+	for i in range(week_plans):
+		plan = Plan4(customer_mobile=mobile, customer_name = name,  start_date=date, p_type = "Week", is_active = "Active", expiry_date= date, number_of_pauses = 0, customer = customer)
+		db.session.add(plan)
+
+	#for loop for Month 
+	for i in range(month_plans):
+		plan = Plan4(customer_mobile=mobile, customer_name = name,  start_date=date, p_type = "Month", is_active = "Active", expiry_date= date, number_of_pauses = 0, customer = customer)
+		db.session.add(plan)	
+	db.session.commit()
+	return 0	
+	
+
 @app.route('/invoice', methods=['GET', 'POST'])
 def invoice():
-	addPlansAndCustomersToDB()
+	#session["isCustomer"] = True
+	print("inside invoice")
+	isCustomer = session.get('isCustomer')
+	print("isCustomer: ", isCustomer)
+	customer = addCustomer()
+	addPlans(customer)
+	shipping_cost = session.get('shippingCost')
+	#addPlansAndCustomersToDB()
+	#if isCustomer == False or isCustomer == None:
+	#	print("got inside the if statement")
+	#	addPlansAndCustomersToDB()
 	month_plans = session.get('monthPlan')
 	week_plans = session.get('weekPlan')
-	sum_of_plans = str(int(month_plans) + int(week_plans))
+	day_plans = session.get('dayPlan')
+	sum_of_plans = str(int(month_plans) + int(week_plans) + int(day_plans))
 
+	name= session.get('customer_full_name')
 	week_price = Prices.query.filter_by(p_type = "Week").first()
 	month_price = Prices.query.filter_by(p_type = "Month").first()
 	print("^^^^^^^^^")
@@ -370,14 +477,15 @@ def invoice():
 
 	month_total = int(month_plans) * int(month_price.amount)
 	week_total = int(week_plans) * int(week_price.amount)
+	shipping_cost1 = int(shipping_cost)
 
-	grand_total = month_total + week_total
+	grand_total = month_total + week_total + shipping_cost1
 
 	today = date.today()
 	# dd/mm/YY
 	d1 = today.strftime("%d/%m/%Y")
 
-	return render_template('invoice.html', month_plans=month_plans, week_plans=week_plans, sum_of_plans=sum_of_plans, week_price=week_price.amount, month_price=month_price.amount, customer_name=customer_name, grand_total=grand_total, month_total=month_total, week_total=week_total, date=d1)	
+	return render_template('invoice.html', month_plans=month_plans, week_plans=week_plans, sum_of_plans=sum_of_plans, week_price=week_price.amount, month_price=month_price.amount, customer_name=name, grand_total=grand_total, month_total=month_total, week_total=week_total, date=d1, shipping_cost=shipping_cost1)	
 
 @app.route('/addtocart', methods=['GET', 'POST'])
 def addtocart():
@@ -396,6 +504,8 @@ def clearDB():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
+	
 
 @app.route('/updateConsole', methods=['GET', 'POST'])
 def updateconsole():
@@ -592,7 +702,8 @@ def signupDay():
 		if v > 100:
 			block_dates_confimed.append(str(k))
 			print(k)
-	print("Blocked dates are: ", block_dates_confimed)		
+	print("Blocked dates are: ", block_dates_confimed)
+
 	return render_template('mobile-check.html', plan="Day", planPrice=130, blocked_dates=block_dates_confimed)	  
 
 
@@ -688,12 +799,17 @@ def shoppingcart():
 	week_prices = week_prices * week_plans
 	week = (week_plans, "Week", week_prices)
 
+	d_price_object = DeliveryPrices.query.all()
+	session['monthPriceDelivery'] = d_price_object[1].amount
+	session['weekPriceDelivery'] = d_price_object[0].amount
+
+
 	if month_plans >= 1 and status_of_checkbox == True:
 		print("month shipping")
-		session['shippingCost'] = 200
+		session['shippingCost'] = d_price_object[0].amount
 	elif month_plans <= 0 and week_plans >= 1 and status_of_checkbox == True:
 		print("week shipping")
-		session['shippingCost'] = 100
+		session['shippingCost'] = d_price_object[1].amount
 	elif month_plans <= 0 and week_plans <= 0 and day_plans >=1 and status_of_checkbox == True:
 		print("day shipping")
 		session['shippingCost'] = 20
@@ -890,6 +1006,8 @@ def signUpFirstTimeCustomer():
 	customer_address = request.form["addr"]
 	longitude = request.form["long"]
 	latitude = request.form["lat"]
+	#comments = request.form["comments"]
+	#print("^^^^$$$$", comments)
 	map_link = "https://www.google.com/maps?saddr=Current+Location&daddr=" + str(latitude) + "," + str(longitude)
 
 	#secondary_mobile = request.form["s-mobile-number"]
@@ -916,7 +1034,7 @@ def signUpFirstTimeCustomer():
 	session["longitude"] = longitude
 	session["latitude"] = latitude
 	session["map_link"] = map_link
-	return redirect('/paytabs')
+	return redirect('/invoice')
 	#return "Complete Customer Registeration"
 
 
@@ -935,7 +1053,13 @@ def addPlansAndCustomersToDB():
 	customer_name = session.get('customer_name')
 	customer_address = session.get('customer_address')
 	customer_str_date = session.get('customer_start_date')
-	toatl_number_of_plans = day_plans + week_plans + month_plans
+	print("****************************************************************")
+	print("Invoice check")
+	print(day_plans)
+	print(week_plans)
+	print(month_plans)
+	print("****************************************************************")
+	toatl_number_of_plans = int(day_plans) + int(week_plans) + int(month_plans)
 	toatl_number_of_plans = str(toatl_number_of_plans)
 	print("toatl_number_of_plans ", toatl_number_of_plans)
 	customer = Customer(mobile=mobile, name=customer_name,number_of_plans = toatl_number_of_plans,
@@ -1082,6 +1206,7 @@ def otpAuth():
 	#print(session["otp"] == int(otp))
 	if session["otp"] == otp:
 		print("OTP matches")
+		session["isCustomer"] = True
 		return redirect('/pick-start-date')
 		#return "Two way authentication approved"
 	return "Two way authentication denied"	
@@ -1575,6 +1700,74 @@ def pausePlan(plan_id):
 	#print(unpasue)
 	return "hi"
 
+@app.route('/proceed', methods=['GET', 'POST'])
+def proceedToPayment():
+	customer_address = request.form["addr"]
+	longitude = request.form["long"]
+	latitude = request.form["lat"]
+
+
+	map_link = "https://www.google.com/maps?saddr=Current+Location&daddr=" + str(latitude) + "," + str(longitude)
+	session["customer_address"] = customer_address
+	session["longitude"] = longitude
+	session["latitude"] = latitude
+	session["map_link"] = map_link
+
+	print(session.get('customer_full_name'))
+	print(session.get('cutomer_start_date'))
+	print(session.get('customer_mobile'))
+	print(session.get('customer_2_mobile'))
+	print(session.get('m_instructions'))
+	print(session.get('d_instruction'))
+	print(session.get('customer_address'))
+	print("long: ", session.get('longitude'))
+	print("lat: ", session.get('latitude'))
+	print(session.get('map_link'))
+	day_plans = session.get('dayPlan')
+	week_plans = session.get('weekPlan')
+	month_plans = session.get('monthPlan')
+	print("day: ", session.get('dayPlan'))
+	print("week: ", session.get('weekPlan'))
+	print("month: ", session.get('monthPlan'))
+	print("week price: ", session.get('weekPrice'))
+
+	return redirect(url_for('paytabs'))
+
+@app.route('/reg-form', methods=['GET', 'POST'])
+def regForm():
+
+	if request.method == 'POST':
+		print("yes post method")
+		session['customer_full_name'] = request.form["name"]
+		session['cutomer_start_date'] = request.form["datepicker"]
+		session['customer_mobile'] = request.form["mobile"]
+		session['customer_2_mobile'] = request.form["2mobile"]
+		session['m_instructions'] = request.form["instructions"]
+		session['d_instruction'] = request.form["instruction2"]
+		#session['customer_login_mobile'] = mobile
+		print(session.get('customer_full_name'))
+		print(session.get('cutomer_start_date'))
+		print(session.get('customer_mobile'))
+		print(session.get('customer_2_mobile'))
+		print(session.get('m_instructions'))
+		print(session.get('d_instruction'))
+
+	return redirect(url_for('maps'))	
+
+
+@app.route('/reg-customer', methods=['GET', 'POST'])
+def regCustomer():
+	block_dates = testDbManipulation()
+	block_dates_confimed = []
+	for k,v in block_dates.items():
+		if v > 100:
+			block_dates_confimed.append(str(k))
+			print(k)
+		print("Blocked dates are: ", block_dates_confimed)		
+	return render_template('reg-customer.html', plan="Day", planPrice=130, blocked_dates=block_dates_confimed)
+	#return render_template("maps.html")
+
+
 @app.route('/maps', methods=['GET', 'POST'])
 def maps():
 	block_dates = testDbManipulation()
@@ -1584,8 +1777,19 @@ def maps():
 			block_dates_confimed.append(str(k))
 			print(k)
 		print("Blocked dates are: ", block_dates_confimed)		
-	return render_template('maps.html', plan="Day", planPrice=130, blocked_dates=block_dates_confimed)
-	#return render_template("maps.html")
+	return render_template('maps.html', plan="Day", planPrice=130, blocked_dates=block_dates_confimed)	
+
+@app.route('/maps-mobile', methods=['GET', 'POST'])
+def mapsMobile():
+	block_dates = testDbManipulation()
+	block_dates_confimed = []
+	for k,v in block_dates.items():
+		if v > 100:
+			block_dates_confimed.append(str(k))
+			print(k)
+		print("Blocked dates are: ", block_dates_confimed)		
+	return render_template('maps_mobile.html', plan="Day", planPrice=130, blocked_dates=block_dates_confimed)
+	#return render_template("maps.html")	
 
 @app.route('/static_map', methods=['GET', 'POST'])
 def static_maps():
@@ -2064,6 +2268,30 @@ def customize():
 		price_object1=price_object[0].amount, price_object2=price_object[1].amount,price_object3=price_object[2].amount)	
 
 ##############################################################
+@app.route('/customize-delivery', methods=['GET', 'POST'])
+def customizeDelivery():
+	price_object = DeliveryPrices.query.all()
+	price = request.form["price"] 
+	price_amount = request.form["price_amount"]
+	print(price)
+	print(price_amount)
+	print(price_object)
+	print("before")
+	print(price_object[0].amount)
+	print(price_object[1].amount)
+	print("after")
+	obj = DeliveryPrices.query.filter_by(p_type = price).first()
+	print("look1", obj.amount)
+	obj.amount = float(price_amount)
+	db.session.commit()
+	print(price_object[0].amount)
+	print(price_object[1].amount)
+	print("look2", obj.amount)
+
+
+	return redirect(url_for('logging'))
+
+##############################################################
 
 @app.route('/loggingin', methods=['GET', 'POST'])
 def logging():
@@ -2252,10 +2480,12 @@ class Customer(db.Model):
 	longitude = db.Column(db.String(100))
 	latitude = db.Column(db.String(100))
 	map_link = db.Column(db.String(100))
+	order_details = db.Column(db.String(100))
+	delivery_details = db.Column(db.String(100))
 	plan = db.relationship("Plan4", uselist=True, backref='customer')
 
 	def __init__(self,mobile,name,number_of_plans, number_of_bags,special_customer, address,
-	delivery_option, longitude, latitude, map_link, plan = []):
+	delivery_option, longitude, latitude, map_link, order_details , delivery_details, plan = []):
 		self.mobile = mobile
 		self.name = name
 		self.number_of_plans = number_of_plans
@@ -2266,6 +2496,8 @@ class Customer(db.Model):
 		self.longitude = longitude
 		self.latitude = latitude
 		self.map_link = map_link
+		self.order_details = order_details
+		self.delivery_details = delivery_details
 		self.plan = plan
 
 class Pause(db.Model):
@@ -2349,7 +2581,12 @@ class TestPlan(db.Model):
 class Prices(db.Model):
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True) 
 	p_type = db.Column(db.String(50))
-	amount = db.Column(db.Float)		
+	amount = db.Column(db.Float)
+
+class DeliveryPrices(db.Model):
+	id = db.Column(db.Integer, primary_key=True, autoincrement=True) 
+	p_type = db.Column(db.String(50))
+	amount = db.Column(db.Float)				
 	#payment = db.relationship("Payment", back_populates="plan")                           	
 	#user = db.relationship("User", back_populates="plan")                            	
 
