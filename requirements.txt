@@ -24,7 +24,7 @@ moyasar==0.6.5
 mysqlclient==1.4.6
 nexmo==2.4.0
 pycparser==2.20
-PyJWT==1.7.1
+PyJWT==2.4.0
 pypaytabs==1.0.1
 PySocks==1.7.1
 python-dateutil==2.8.1
